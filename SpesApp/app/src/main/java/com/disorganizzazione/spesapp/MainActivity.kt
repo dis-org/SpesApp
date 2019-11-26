@@ -1,4 +1,4 @@
-package com.harisont.spesapp
+package com.disorganizzazione.spesapp
 
 import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -8,7 +8,7 @@ import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import com.harisont.spesapp.ui.main.SectionsPagerAdapter
+import com.disorganizzazione.spesapp.ui.main.SectionsPagerAdapter
 
 class MainActivity : AppCompatActivity() {
 

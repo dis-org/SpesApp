@@ -1,4 +1,4 @@
-package com.harisont.spesapp.ui.main
+package com.disorganizzazione.spesapp.ui.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

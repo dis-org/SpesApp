@@ -1,4 +1,4 @@
-package com.harisont.spesapp
+package com.disorganizzazione.spesapp
 
 import org.junit.Test
 

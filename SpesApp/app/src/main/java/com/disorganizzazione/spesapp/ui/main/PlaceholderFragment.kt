@@ -1,4 +1,4 @@
-package com.harisont.spesapp.ui.main
+package com.disorganizzazione.spesapp.ui.main
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.harisont.spesapp.R
+import com.disorganizzazione.spesapp.R
 
 /**
  * A placeholder fragment containing a simple view.
