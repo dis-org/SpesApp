@@ -19,7 +19,7 @@ interface IngredientDAO {
 
     // non sono sicura di quale sia la migliore strategia
     // not sure what the best strategy is
-    // TODO: scelgiere strategia/decide on strategy
+    // TODO: scelgiere strategia/decide on strategy (ABORT?!)
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertIngredient(ingredient: IngredientEntity)
 

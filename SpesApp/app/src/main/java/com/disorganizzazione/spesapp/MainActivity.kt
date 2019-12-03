@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
             testIngr.inStorage = true
 
             db.ingredientDAO().insertIngredient(testIngr)
-        }
+        }.start()
 
     }
 }
