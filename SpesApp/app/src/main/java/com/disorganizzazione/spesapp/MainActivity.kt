@@ -8,6 +8,10 @@ import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.room.Room
+import com.disorganizzazione.spesapp.db.IngredientDAO
+import com.disorganizzazione.spesapp.db.IngredientEntity
+import com.disorganizzazione.spesapp.db.SpesAppDB
 import com.disorganizzazione.spesapp.ui.main.SectionsPagerAdapter
 
 class MainActivity : AppCompatActivity() {
@@ -26,5 +30,21 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
+
+        // linea di codice magica e misteriosa/mysterious magical line
+        var db = Room.databaseBuilder(applicationContext, SpesAppDB::class.java,"SpesAppDB").build()
+
+        // TEST
+        // TODO: cancellare/delete
+        Thread {
+            var testIngr = IngredientEntity()
+            testIngr.name = "Carote"
+            testIngr.priority = 1
+            testIngr.portions = null
+            testIngr.inStorage = true
+
+            db.ingredientDAO().insertIngredient(testIngr)
+        }
+
     }
 }
