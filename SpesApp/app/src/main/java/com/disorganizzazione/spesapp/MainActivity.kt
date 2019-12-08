@@ -13,6 +13,7 @@ import com.disorganizzazione.spesapp.db.IngredientDAO
 import com.disorganizzazione.spesapp.db.IngredientEntity
 import com.disorganizzazione.spesapp.db.SpesAppDB
 import com.disorganizzazione.spesapp.ui.main.SectionsPagerAdapter
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -39,8 +40,8 @@ class MainActivity : AppCompatActivity() {
         Thread {
             var testIngr = IngredientEntity()
             testIngr.name = "Carote"
-            testIngr.priority = 1
             testIngr.portions = null
+            testIngr.use_before = Date(0)
             testIngr.inStorage = true
 
             db.ingredientDAO().insertIngredient(testIngr)
