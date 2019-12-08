@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import org.jetbrains.annotations.NotNull
+import java.util.*
 
 /* Classe che rappresenta la tabella "INGREDIENTI" (mostrata nell'activity principale).
 *  Class representing the "INGREDIENTS" table (shown in the main activity). */
@@ -13,15 +14,13 @@ class IngredientEntity {
     @PrimaryKey
     var name : String = ""
 
-    // i veri livelli di priorità sono 1,2,3, quindi forse meglio usare un'enum
-    // 1,2,3 are the actual levels of priority so maybe an enum would be better
+    // Data di scadenza: è un Long perché SQLite non ha manco le date...
+    // Expiration date: it is a Long because SQLite does not even have dates...
     @ColumnInfo
-    var priority : Int? = 0
+    var use_before : Date? = null
 
-    // 0 sta per "non specificato", non 0 porzioni
-    // 0 means unspecified, not 0 portions
     @ColumnInfo
-    var portions : Int? = 0
+    var portions : Int? = null
 
     @ColumnInfo @NotNull
     var inStorage : Boolean = false
