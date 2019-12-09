@@ -19,7 +19,7 @@ class IngredientEntity {
     // Data di scadenza: è un Long perché SQLite non ha manco le date...
     // Expiration date: it is a Long because SQLite does not even have dates...
     @ColumnInfo
-    var use_before : Date? = null
+    var useBefore : Date? = null
 
     @ColumnInfo
     var portions : Int? = null
