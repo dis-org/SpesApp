@@ -3,6 +3,7 @@ package com.disorganizzazione.spesapp.db
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.disorganizzazione.spesapp.IngredientName
 import org.jetbrains.annotations.NotNull
 import java.util.*
 
@@ -11,8 +12,9 @@ import java.util.*
 
 @Entity
 class IngredientEntity {
+    // TODO: decidere se va bene come cp/decide if it should be the pk
     @PrimaryKey
-    var name : String = ""
+    var name : IngredientName = ""
 
     // Data di scadenza: è un Long perché SQLite non ha manco le date...
     // Expiration date: it is a Long because SQLite does not even have dates...
