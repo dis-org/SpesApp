@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
             var testIngr = IngredientEntity()
             testIngr.name = "Carote"
             testIngr.portions = null
-            testIngr.use_before = Date(0)
+            testIngr.useBefore = Date(0)
             testIngr.inStorage = true
 
             db.ingredientDAO().insertIngredient(testIngr)

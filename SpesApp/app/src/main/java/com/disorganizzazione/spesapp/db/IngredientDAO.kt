@@ -11,7 +11,7 @@ interface IngredientDAO {
     // nota: MySQL non ha i booleani
     // note: MySQL does not have booleans
 
-    @Query("SELECT * FROM IngredientEntity WHERE inStorage == 1 ORDER BY use_before")
+    @Query("SELECT * FROM IngredientEntity WHERE inStorage == 1 ORDER BY useBefore")
     fun selectInStorage(): List<IngredientEntity>
 
     @Query("SELECT * FROM IngredientEntity WHERE inStorage == 0")
