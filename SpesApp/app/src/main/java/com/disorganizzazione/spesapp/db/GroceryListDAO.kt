@@ -21,4 +21,6 @@ interface GroceryListDAO {
 
     @Delete
     fun deleteGroceryList(item: GroceryListEntity)
+    // nota: questa funzione non verrà (quasi) mai chiamata se non accompagnata da una chiamata di insertInStorage
+    // note: this function will (almost) never be called if not together with a call to insertInStorage()
 }
