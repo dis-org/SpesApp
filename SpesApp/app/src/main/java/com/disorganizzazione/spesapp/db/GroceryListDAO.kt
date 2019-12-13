@@ -11,16 +11,16 @@ interface GroceryListDAO {
     // note: MySQL does not have booleans
 
     @Query("SELECT * FROM GroceryListEntity")
-    fun selectAllGroceryList(): List<GroceryListEntity>
+    fun selectAllInGroceryList(): List<GroceryListEntity>
 
     // non sono sicura di quale sia la migliore strategia
     // not sure what the best strategy is
     // TODO: scegliere strategia/decide on strategy (ABORT?!)
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertGroceryList(item: GroceryListEntity)
+    fun insertInGroceryList(item: GroceryListEntity)
 
     @Delete
-    fun deleteGroceryList(item: GroceryListEntity)
+    fun deleteFromGroceryList(item: GroceryListEntity)
     // nota: questa funzione non verrà (quasi) mai chiamata se non accompagnata da una chiamata di insertInStorage
     // note: this function will (almost) never be called if not together with a call to insertInStorage()
 }

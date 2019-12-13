@@ -11,7 +11,7 @@ import java.util.*
 *  Class representing table "IN STORAGE" (shown in the main activity alongside "GROCERY LIST"). */
 
 @Entity
-class InStorageEntity {
+class StorageEntity {
     @PrimaryKey
     var name : IngredientName = ""
 
