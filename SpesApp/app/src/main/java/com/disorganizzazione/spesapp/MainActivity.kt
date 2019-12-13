@@ -6,11 +6,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
 import androidx.room.Room
-import com.disorganizzazione.spesapp.db.IngredientDAO
-import com.disorganizzazione.spesapp.db.IngredientEntity
+import com.disorganizzazione.spesapp.db.InStorageEntity
 import com.disorganizzazione.spesapp.db.SpesAppDB
 import com.disorganizzazione.spesapp.ui.main.SectionsPagerAdapter
 import java.util.*
@@ -41,13 +38,12 @@ class MainActivity : AppCompatActivity() {
         // TEST
         // TODO: cancellare/delete
         Thread {
-            var testIngr = IngredientEntity()
+            var testIngr = InStorageEntity()
             testIngr.name = "Carote"
             testIngr.portions = null
             testIngr.useBefore = Date(0)
-            testIngr.inStorage = true
 
-            db.ingredientDAO().insertIngredient(testIngr)
+            db.inStorageDAO().insertInStorage(testIngr)
         }.start()
 
     }

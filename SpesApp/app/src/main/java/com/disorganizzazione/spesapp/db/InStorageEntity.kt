@@ -7,12 +7,11 @@ import com.disorganizzazione.spesapp.IngredientName
 import org.jetbrains.annotations.NotNull
 import java.util.*
 
-/* Classe che rappresenta la tabella "INGREDIENTI" (mostrata nell'activity principale).
-*  Class representing the "INGREDIENTS" table (shown in the main activity). */
+/* Classe che rappresenta la tabella "DISPENSA" (mostrata nell'activity principale assieme a "LISTA DELLA SPESA").
+*  Class representing table "IN STORAGE" (shown in the main activity alongside "GROCERY LIST"). */
 
 @Entity
-class IngredientEntity {
-    // TODO: decidere se va bene come cp/decide if it should be the pk
+class InStorageEntity {
     @PrimaryKey
     var name : IngredientName = ""
 
@@ -21,9 +20,8 @@ class IngredientEntity {
     @ColumnInfo
     var useBefore : Date? = null
 
+    // TODO: cambiare nome e tipo in qualcosa di più flessibile (String?)
+    // TODO: change name and type to something more flexible (String?)
     @ColumnInfo
     var portions : Int? = null
-
-    @ColumnInfo @NotNull
-    var inStorage : Boolean = false
 }

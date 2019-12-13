@@ -8,8 +8,8 @@ import com.disorganizzazione.spesapp.utils.Converters
 /* Classe base per l'intero database. Note: DAO stands for Data Access Object.
 *  Basic class for the entire database. NB: DAO sta per Data Access Object. */
 
-@Database(entities = [IngredientEntity::class, RecipesEntity::class], version = 2)
+@Database(entities = [InStorageEntity::class, GroceryListEntity::class, RecipesEntity::class], version = 6)
 @TypeConverters(Converters::class)
 abstract class SpesAppDB : RoomDatabase() {
-    abstract fun ingredientDAO() : IngredientDAO
+    abstract fun inStorageDAO() : InStorageDAO
 }
