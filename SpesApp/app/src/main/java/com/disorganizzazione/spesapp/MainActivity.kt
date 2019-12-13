@@ -33,7 +33,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         // linea di codice magica e misteriosa/mysterious magical line
-        var db = Room.databaseBuilder(applicationContext, SpesAppDB::class.java,"SpesAppDB").build()
+        var db = Room.databaseBuilder(
+            applicationContext,
+            // TODO: fallBackToDestructiveMigration() when the database design is "definitive".
+            SpesAppDB::class.java,"SpesAppDB").fallbackToDestructiveMigration().build()
 
         // TEST
         // TODO: cancellare/delete
