@@ -6,9 +6,11 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
+import androidx.room.Room
+import com.disorganizzazione.spesapp.db.StorageEntity
+import com.disorganizzazione.spesapp.db.SpesAppDB
 import com.disorganizzazione.spesapp.ui.main.SectionsPagerAdapter
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,5 +28,23 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
+
+        // linea di codice magica e misteriosa/mysterious magical line
+        var db = Room.databaseBuilder(
+            applicationContext,
+            // TODO: fallBackToDestructiveMigration() when the database design is "definitive".
+            SpesAppDB::class.java,"SpesAppDB").fallbackToDestructiveMigration().build()
+
+        // TEST
+        // TODO: cancellare/delete
+        Thread {
+            var testIngr = StorageEntity()
+            testIngr.name = "Carote"
+            testIngr.portions = null
+            testIngr.useBefore = Date(0)
+
+            db.storageDAO().insertInStorage(testIngr)
+        }.start()
+
     }
 }
