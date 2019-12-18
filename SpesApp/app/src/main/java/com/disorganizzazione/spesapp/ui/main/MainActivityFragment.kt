@@ -11,9 +11,11 @@ import androidx.lifecycle.ViewModelProviders
 import com.disorganizzazione.spesapp.R
 
 /**
- * A placeholder fragment containing a simple view.
+ * Un fragment usato in entrambe le schede dell'attività principale, contenente una recycler view in cui è mostrata una
+ * lista di ingredienti.
+ * A fragment used in both tabs of the main activity, containing a recycler view showing a list of ingredients.
  */
-class PlaceholderFragment : Fragment() {
+class MainActivityFragment : Fragment() {
 
     private lateinit var pageViewModel: PageViewModel
 
@@ -48,8 +50,8 @@ class PlaceholderFragment : Fragment() {
          * number.
          */
         @JvmStatic
-        fun newInstance(sectionNumber: Int): PlaceholderFragment {
-            return PlaceholderFragment().apply {
+        fun newInstance(sectionNumber: Int): MainActivityFragment {
+            return MainActivityFragment().apply {
                 arguments = Bundle().apply {
                     putInt(ARG_SECTION_NUMBER, sectionNumber)
                 }
