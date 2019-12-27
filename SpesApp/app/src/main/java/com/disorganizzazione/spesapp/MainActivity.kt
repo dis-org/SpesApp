@@ -36,12 +36,20 @@ class MainActivity : AppCompatActivity() {
         // TEST
         // TODO: cancellare/delete
         Thread {
-            var testIngr = StorageEntity()
-            testIngr.name = "Carote"
-            testIngr.portions = null
-            testIngr.useBefore = Date(0)
+            var testIngr0 = StorageEntity()
+            testIngr0.name = "Carote"
 
-            db.storageDAO().insertInStorage(testIngr)
+            db?.storageDAO()?.insertInStorage(testIngr0)
+
+            var testIngr1 = StorageEntity()
+            testIngr1.name = "Patate"
+
+            db?.storageDAO()?.insertInStorage(testIngr1)
+
+            var testIngr2 = StorageEntity()
+            testIngr2.name = "Uova"
+
+            db?.storageDAO()?.insertInStorage(testIngr2)
         }.start()
 
     }
