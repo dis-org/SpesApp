@@ -6,11 +6,9 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.room.Room
 import com.disorganizzazione.spesapp.db.StorageEntity
 import com.disorganizzazione.spesapp.db.SpesAppDB
 import com.disorganizzazione.spesapp.ui.main.SectionsPagerAdapter
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -36,21 +34,15 @@ class MainActivity : AppCompatActivity() {
         // TEST
         // TODO: cancellare/delete
         Thread {
-            var testIngr0 = StorageEntity()
-            testIngr0.name = "Carote"
-
-            db?.storageDAO()?.insertInStorage(testIngr0)
-
             var testIngr1 = StorageEntity()
             testIngr1.name = "Patate"
-
             db?.storageDAO()?.insertInStorage(testIngr1)
-
-            var testIngr2 = StorageEntity()
-            testIngr2.name = "Uova"
-
-            db?.storageDAO()?.insertInStorage(testIngr2)
         }.start()
 
+        Thread {
+            var testIngr2 = StorageEntity()
+            testIngr2.name = "Uova"
+            db?.storageDAO()?.insertInStorage(testIngr2)
+        }.start()
     }
 }
