@@ -14,6 +14,8 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
+    var db: SpesAppDB? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -29,11 +31,7 @@ class MainActivity : AppCompatActivity() {
                 .setAction("Action", null).show()
         }
 
-        // linea di codice magica e misteriosa/mysterious magical line
-        var db = Room.databaseBuilder(
-            applicationContext,
-            // TODO: fallBackToDestructiveMigration() when the database design is "definitive".
-            SpesAppDB::class.java,"SpesAppDB").fallbackToDestructiveMigration().build()
+        db = SpesAppDB.getInstance(this)
 
         // TEST
         // TODO: cancellare/delete
