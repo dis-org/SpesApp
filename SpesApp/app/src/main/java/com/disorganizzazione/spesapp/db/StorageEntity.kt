@@ -2,10 +2,6 @@ package com.disorganizzazione.spesapp.db
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.PrimaryKey
-import com.disorganizzazione.spesapp.IngredientEntity
-import com.disorganizzazione.spesapp.IngredientName
-import org.jetbrains.annotations.NotNull
 import java.util.*
 
 /* Classe che rappresenta la tabella "DISPENSA" (mostrata nell'activity principale assieme a "LISTA DELLA SPESA").
