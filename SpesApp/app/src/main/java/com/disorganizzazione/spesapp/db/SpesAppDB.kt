@@ -13,7 +13,9 @@ import com.disorganizzazione.spesapp.utils.Converters
 @Database(entities = [StorageEntity::class, GroceryListEntity::class, RecipesEntity::class], version = 7)
 @TypeConverters(Converters::class)
 abstract class SpesAppDB : RoomDatabase() {
-    abstract fun storageDAO() : StorageDAO
+    abstract fun storageDAO(): StorageDAO
+    abstract fun groceryListDAO(): GroceryListDAO
+    abstract fun recipesDAO(): RecipesDAO
 
     // penso che serva per creare il database come singleton
     // this is to make the database a singleton, I think
