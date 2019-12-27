@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -27,14 +26,12 @@ class MainActivityFragment : Fragment() {
 
     private lateinit var pageViewModel: PageViewModel
 
-    // l'overriding di onCreate servirà solo se vorremo permettere rotazioni dello schermo
-    // overriding onCreate will only be useful if we want to allow screen rotations
-    /*override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         pageViewModel = ViewModelProviders.of(this).get(PageViewModel::class.java).apply {
             setIndex(arguments?.getInt(ARG_SECTION_NUMBER) ?: 1)
         }
-    }*/
+    }
 
     // definito qui perché sia visibile, anche se il database viene creato nella main activity.
     // Ci deve essere un modo migliore.
