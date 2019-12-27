@@ -12,8 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.disorganizzazione.spesapp.IngredientEntity
 import com.disorganizzazione.spesapp.R
+import com.disorganizzazione.spesapp.db.SpesAppDB
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_main.view.*
+import kotlin.concurrent.thread
 
 /**
  * Un fragment usato in entrambe le schede dell'attività principale, contenente una recycler view in cui è mostrata una
@@ -34,28 +36,33 @@ class MainActivityFragment : Fragment() {
         }
     }*/
 
+    // definito qui perché sia visibile, anche se il database viene creato nella main activity.
+    // Ci deve essere un modo migliore.
+    // this is defined here so it's visible, even though the database is created in the main activity.
+    // There must be a better way.
+    private var db: SpesAppDB? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        lateinit var recyclerView: RecyclerView
-        lateinit var viewAdapter: RecyclerView.Adapter<*>
-        lateinit var viewManager: RecyclerView.LayoutManager
+        // associa il layout del fragment al fragment
+        // it associates the fragment layout to the fragment
+        val fragmentLayout = inflater.inflate(R.layout.fragment_main, container, false)
 
-        // seleziona il layout manager responsabile di mostrare i singoli elementi
-        // selects the layout manager responsible for showing the individual elements
-        viewManager = LinearLayoutManager(activity)
+        // setta il layout manager responsabile di mostrare i singoli elementi della lista
+        // sets the layout manager responsible for showing the individual elements of the list
+        fragmentLayout.ingr_recycler_view.layoutManager = LinearLayoutManager(activity)
 
-        // seleziona l'adapter responsabile di creare le view e associarle ai dati del db
-        // selects the adapter responsible for creating the views and binding them to the data in the db
-        val ingredientList = listOf<IngredientEntity>()
-        viewAdapter = IngredientListAdapter(ingredientList)
+        var db = SpesAppDB.getInstance(activity!!.applicationContext)
 
-        // applica il viewManager e l'adapter alla RecyclerView del frammento
-        // applies the viewManager and the adapter to the fragment's RecyclerView
-        recyclerView = ingr_recycler_view.apply {
-            layoutManager = viewManager
-            adapter = viewAdapter
+        thread {
+            // TODO: select the right list in the right tab
+            val ingredientList = db?.storageDAO()?.selectAllInStorage()
+            if (ingredientList != null)
+                activity!!.runOnUiThread {
+                    ingr_recycler_view.adapter = IngredientListAdapter(ingredientList)
+                }
         }
 
         // servirà solo come esempio se vorremo permettere rotazioni dello schermo
@@ -64,7 +71,8 @@ class MainActivityFragment : Fragment() {
         pageViewModel.text.observe(this, Observer<String> {
             textView.text = it
         })*/
-        return recyclerView
+
+        return fragmentLayout
     }
 
     companion object {
