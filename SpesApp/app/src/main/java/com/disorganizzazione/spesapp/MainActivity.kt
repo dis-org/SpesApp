@@ -6,13 +6,13 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.room.Room
 import com.disorganizzazione.spesapp.db.StorageEntity
 import com.disorganizzazione.spesapp.db.SpesAppDB
 import com.disorganizzazione.spesapp.ui.main.SectionsPagerAdapter
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
+
+    var db: SpesAppDB? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,22 +29,20 @@ class MainActivity : AppCompatActivity() {
                 .setAction("Action", null).show()
         }
 
-        // linea di codice magica e misteriosa/mysterious magical line
-        var db = Room.databaseBuilder(
-            applicationContext,
-            // TODO: fallBackToDestructiveMigration() when the database design is "definitive".
-            SpesAppDB::class.java,"SpesAppDB").fallbackToDestructiveMigration().build()
+        db = SpesAppDB.getInstance(this)
 
         // TEST
         // TODO: cancellare/delete
         Thread {
-            var testIngr = StorageEntity()
-            testIngr.name = "Carote"
-            testIngr.portions = null
-            testIngr.useBefore = Date(0)
-
-            db.storageDAO().insertInStorage(testIngr)
+            var testIngr1 = StorageEntity()
+            testIngr1.name = "Patate"
+            db?.storageDAO()?.insertInStorage(testIngr1)
         }.start()
 
+        Thread {
+            var testIngr2 = StorageEntity()
+            testIngr2.name = "Uova"
+            db?.storageDAO()?.insertInStorage(testIngr2)
+        }.start()
     }
 }
