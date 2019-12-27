@@ -13,9 +13,6 @@ interface GroceryListDAO {
     @Query("SELECT * FROM GroceryListEntity")
     fun selectAllInGroceryList(): List<GroceryListEntity>
 
-    // non sono sicura di quale sia la migliore strategia
-    // not sure what the best strategy is
-    // TODO: scegliere strategia/decide on strategy (ABORT?!)
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertInGroceryList(item: GroceryListEntity)
 

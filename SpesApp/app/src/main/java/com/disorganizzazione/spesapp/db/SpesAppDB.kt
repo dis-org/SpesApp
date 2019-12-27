@@ -25,7 +25,7 @@ abstract class SpesAppDB : RoomDatabase() {
         fun getInstance(context: Context): SpesAppDB? {
             if (INSTANCE == null) {
                 synchronized(SpesAppDB::class) {
-                    // TODO: fallBackToDestructiveMigration() when the database design is "definitive"
+                    // TODO: manage fallBackToDestructiveMigration() when the database design is "definitive"
                     INSTANCE = Room.databaseBuilder(
                         context.applicationContext,
                         SpesAppDB::class.java,

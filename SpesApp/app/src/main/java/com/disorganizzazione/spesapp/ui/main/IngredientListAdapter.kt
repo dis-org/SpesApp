@@ -3,7 +3,7 @@ package com.disorganizzazione.spesapp.ui.main
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.disorganizzazione.spesapp.IngredientEntity
+import com.disorganizzazione.spesapp.db.IngredientEntity
 import com.disorganizzazione.spesapp.R
 import kotlinx.android.synthetic.main.ingredient_row.view.*
 

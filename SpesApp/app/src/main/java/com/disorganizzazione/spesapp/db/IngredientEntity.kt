@@ -1,8 +1,9 @@
-package com.disorganizzazione.spesapp
+package com.disorganizzazione.spesapp.db
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.disorganizzazione.spesapp.IngredientName
 
 /**
  * Tabella astratta di ingredienti,
@@ -17,8 +18,6 @@ abstract class IngredientEntity {
     @PrimaryKey
     var name : IngredientName = ""
 
-    // TODO: cambiare nome e tipo in qualcosa di più flessibile (String?)
-    // TODO: change name and type to something more flexible (String?)
     @ColumnInfo
     var portions : Int? = null
 

@@ -4,5 +4,4 @@ import androidx.room.Dao
 
 @Dao
 interface RecipesDAO {
-    // TODO
 }
