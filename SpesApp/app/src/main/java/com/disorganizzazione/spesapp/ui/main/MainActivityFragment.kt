@@ -55,13 +55,21 @@ class MainActivityFragment : Fragment() {
         fragmentLayout.ingr_recycler_view.layoutManager = LinearLayoutManager(activity)
 
         var db = SpesAppDB.getInstance(activity!!.applicationContext)
+        var ingredientList: List<IngredientEntity>? = emptyList()
 
+        // esegue le "select all" sulla giusta tabella a seconda del fragment in uso.
+        // deve essere su un thread secondario perché sennò Android si preoccupa che la cosa prenda troppo tempo.
+        // performs the "select alls" on the right table depending on the current fragment.
+        // must be done on a secondary thread cause otherwise Android complains it might take too long.
         thread {
-            // TODO: select the right list in the right tab
-            val ingredientList = db?.storageDAO()?.selectAllInStorage()
-            if (ingredientList != null)
+            when (pageViewModel.getIndex()) {
+                1 -> ingredientList = db?.groceryListDAO()?.selectAllInGroceryList()
+                2 -> ingredientList = db?.storageDAO()?.selectAllInStorage()
+            }
+                // lo si scrive dentro il thread secondario per mantenere la sequenzialità. Credo.
+                // we do this from inside the secondary thread so to preserve sequentiality. I think.
                 activity!!.runOnUiThread {
-                    ingr_recycler_view.adapter = IngredientListAdapter(ingredientList)
+                    ingr_recycler_view.adapter = IngredientListAdapter(ingredientList!!)
                 }
         }
 
