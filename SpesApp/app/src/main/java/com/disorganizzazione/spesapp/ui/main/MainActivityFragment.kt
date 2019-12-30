@@ -74,8 +74,12 @@ class MainActivityFragment : Fragment() {
 
         // event listener per il bottone +
         // event listener for the + button
-        fragmentLayout.fab.setOnClickListener {view ->
-            startActivity(Intent(activity!!.applicationContext, AddIngredientActivity::class.java))
+        fragmentLayout.fab.setOnClickListener {
+            val intent = Intent(activity!!.applicationContext, AddIngredientActivity::class.java)
+                // comunica alla nuova activity da quale fragment è stata aperta
+                // tells the new activity which fragment if was opened from
+                .putExtra("tab",pageViewModel.getIndex())
+            startActivity(intent)
         }
 
         // servirà solo come esempio se vorremo permettere rotazioni dello schermo
