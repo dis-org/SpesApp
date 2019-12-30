@@ -12,9 +12,7 @@ class AddIngredientActivity : AppCompatActivity() {
         // riceve il numero della tab. Potremmo anche usare un booleano
         // gets the tab number. We may just use a boolean instead of an int
 
-        val tab = intent.getIntExtra("tab",0)
-
-        when (tab) {
+        when (intent.getIntExtra("tab",0)) {
             1 -> setTitle(R.string.add_grocery)
             2 -> setTitle(R.string.add_storage)
             else -> error(R.string.never_shown)
