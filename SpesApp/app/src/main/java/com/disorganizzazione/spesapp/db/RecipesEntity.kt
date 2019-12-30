@@ -4,13 +4,14 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.disorganizzazione.spesapp.IngredientName
+import org.jetbrains.annotations.NotNull
 
 @Entity
 class RecipesEntity {
     @PrimaryKey
     var title : String = ""
 
-    @ColumnInfo
+    @ColumnInfo @NotNull
     var ingredients : List<IngredientName> = emptyList()
 
     // "Passi" della ricetta
