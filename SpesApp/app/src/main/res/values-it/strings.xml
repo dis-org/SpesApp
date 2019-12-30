@@ -2,5 +2,11 @@
     <string name="app_name">SpesApp</string>
     <string name="tab_text_1">Spesa</string>
     <string name="tab_text_2">Dispensa</string>
+
+    <!-- Error messages -->
     <string name="never_shown">Ahh! L\'app è stregata! Questa stringa non dovrebbe mai essere visualizzata.</string>
+
+    <!-- AddIngredientActivity -->
+    <string name="add_grocery">Aggiungi alla lista della spesa</string>
+    <string name="add_storage">Aggiungi alla dispensa</string>
 </resources>
