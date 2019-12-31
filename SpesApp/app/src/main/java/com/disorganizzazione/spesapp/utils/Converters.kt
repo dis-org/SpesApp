@@ -20,17 +20,30 @@ class Converters {
     }
 
     @TypeConverter
-    fun stringToQuantityPair(string: String): Pair<Float,UnitOfMeasurement?>? {
-        val splitted = string.split(' ', limit = 2)
-        val number = splitted[0].toFloatOrNull()
-        if (number != null)
-            return Pair(number,splitted[1])
-        else return null
+    fun stringToIngredients(str: String?): List<IngredientName>? {
+        return null // TODO
     }
 
     @TypeConverter
-    fun quantityPairToString(quant: Pair<Float,UnitOfMeasurement?>?): String? {
-        if (quant != null) return "${quant.first} ${quant?.second ?: ""}"
+    fun ingredientsToString(list: List<IngredientName>?): String? {
+        return null // TODO
+    }
+
+    @TypeConverter
+    fun stringToQuantityPair(str: String?): Pair<Float,UnitOfMeasurement?>? {
+        if (str != null) {
+            val spl= str.split(' ', limit = 2)
+            val num = spl[0].toFloatOrNull()
+            if (num != null)
+                return Pair(num, spl[1])
+        }
+        return null
+    }
+
+    @TypeConverter
+    fun quantityPairToString(qnt: Pair<Float,UnitOfMeasurement?>?): String? {
+        if (qnt != null)
+            return "${qnt.first} ${qnt.second ?: ""}"
         return null
     }
 }
