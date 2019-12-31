@@ -27,7 +27,9 @@ class Converters {
     @TypeConverter
     fun ingredientsToString(list: List<IngredientName>?): String? {
         return null // TODO
-      
+    }
+
+    @TypeConverter
     fun stringToQuantityPair(string: String): Pair<Float,UnitOfMeasurement?>? {
         val splitted = string.split(',', limit = 2)
         val number = splitted[0].toFloatOrNull()
