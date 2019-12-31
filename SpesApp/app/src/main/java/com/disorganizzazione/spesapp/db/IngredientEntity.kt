@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.disorganizzazione.spesapp.IngredientName
+import com.disorganizzazione.spesapp.UnitOfMeasurement
 
 /**
  * Tabella astratta di ingredienti,
@@ -16,9 +17,14 @@ import com.disorganizzazione.spesapp.IngredientName
 abstract class IngredientEntity {
 
     @PrimaryKey
-    var name : IngredientName = ""
+    var name: IngredientName = ""
 
     @ColumnInfo
-    var portions : Int? = null
+    var quantity: Pair<Float,UnitOfMeasurement?>? = null
+
+    // le categorie sono scelte dall'utente, per cui sono semplici stringhe
+    // categories will be user-defined, so they're just strings
+    @ColumnInfo
+    var category : String? = null
 
 }
