@@ -20,13 +20,13 @@ class Converters {
     }
 
     @TypeConverter
-    fun stringToIngredients(str: String?): List<IngredientName>? {
-        return null // TODO
+    fun stringToIngredients(str: String): List<IngredientName> {
+        return str.split(',')
     }
 
     @TypeConverter
-    fun ingredientsToString(list: List<IngredientName>?): String? {
-        return null // TODO
+    fun ingredientsToString(list: List<IngredientName>): String {
+        return list.joinToString(",")
     }
 
     @TypeConverter
