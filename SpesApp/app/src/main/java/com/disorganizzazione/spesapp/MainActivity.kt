@@ -24,19 +24,5 @@ class MainActivity : AppCompatActivity() {
         tabs.setupWithViewPager(viewPager)
 
         db = SpesAppDB.getInstance(this)
-
-        // TEST
-        // TODO: cancellare/delete
-        Thread {
-            var testIngr1 = StorageEntity()
-            testIngr1.name = "Patate"
-            db?.storageDAO()?.insertInStorage(testIngr1)
-        }.start()
-
-        Thread {
-            var testIngr2 = StorageEntity()
-            testIngr2.name = "Uova"
-            db?.storageDAO()?.insertInStorage(testIngr2)
-        }.start()
     }
 }

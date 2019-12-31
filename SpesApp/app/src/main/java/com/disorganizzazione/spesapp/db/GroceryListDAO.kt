@@ -13,7 +13,7 @@ interface GroceryListDAO {
     @Query("SELECT * FROM GroceryListEntity")
     fun selectAllInGroceryList(): List<GroceryListEntity>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.ABORT)
     fun insertInGroceryList(item: GroceryListEntity)
 
     @Delete
