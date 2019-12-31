@@ -2,5 +2,12 @@
     <string name="app_name">SpesApp</string>
     <string name="tab_text_1">Grocery list</string>
     <string name="tab_text_2">Storage</string>
+
+    <!-- Error messages -->
     <string name="never_shown">Ahh! The app is haunted! This string should never be displayed.</string>
+
+    <!-- AddIngredientActivity -->
+    <string name="add_grocery">Add to grocery list</string>
+    <string name="add_storage">Add to storage</string>
+    <string name="name">Ingredient name *</string>
 </resources>

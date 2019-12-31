@@ -20,6 +20,14 @@ class Converters {
     }
 
     @TypeConverter
+    fun stringToIngredients(str: String?): List<IngredientName>? {
+        return null // TODO
+    }
+
+    @TypeConverter
+    fun ingredientsToString(list: List<IngredientName>?): String? {
+        return null // TODO
+      
     fun stringToQuantityPair(string: String): Pair<Float,UnitOfMeasurement?>? {
         val splitted = string.split(',', limit = 2)
         val number = splitted[0].toFloatOrNull()

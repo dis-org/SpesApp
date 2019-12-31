@@ -1,5 +1,6 @@
 package com.disorganizzazione.spesapp.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,9 +8,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.disorganizzazione.spesapp.AddIngredientActivity
 import com.disorganizzazione.spesapp.db.IngredientEntity
 import com.disorganizzazione.spesapp.R
 import com.disorganizzazione.spesapp.db.SpesAppDB
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_main.view.*
 import kotlin.concurrent.thread
@@ -66,6 +70,16 @@ class MainActivityFragment : Fragment() {
                 activity!!.runOnUiThread {
                     ingr_recycler_view.adapter = IngredientListAdapter(ingredientList!!)
                 }
+        }
+
+        // event listener per il bottone +
+        // event listener for the + button
+        fragmentLayout.fab.setOnClickListener {
+            val intent = Intent(activity!!.applicationContext, AddIngredientActivity::class.java)
+                // comunica alla nuova activity da quale fragment è stata aperta
+                // tells the new activity which fragment if was opened from
+                .putExtra("tab",pageViewModel.getIndex())
+            startActivity(intent)
         }
 
         // servirà solo come esempio se vorremo permettere rotazioni dello schermo
