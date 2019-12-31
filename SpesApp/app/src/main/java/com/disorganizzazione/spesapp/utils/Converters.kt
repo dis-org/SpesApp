@@ -21,7 +21,7 @@ class Converters {
 
     @TypeConverter
     fun stringToQuantityPair(string: String): Pair<Float,UnitOfMeasurement?>? {
-        val splitted = string.split(',', limit = 2)
+        val splitted = string.split(' ', limit = 2)
         val number = splitted[0].toFloatOrNull()
         if (number != null)
             return Pair(number,splitted[1])
@@ -30,7 +30,7 @@ class Converters {
 
     @TypeConverter
     fun quantityPairToString(quant: Pair<Float,UnitOfMeasurement?>?): String? {
-        if (quant != null) return "${quant.first},${quant?.second ?: ""}"
+        if (quant != null) return "${quant.first} ${quant?.second ?: ""}"
         return null
     }
 }
