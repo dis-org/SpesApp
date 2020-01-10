@@ -13,6 +13,8 @@
     <string name="quant">Quantity</string>
     <string name="unit">Unit</string>
     <string name="cat">Category</string>
+    <string name="use_bf">Expiry date</string>
+    <string name="add_btn">ADD</string>
 
 
 </resources>
