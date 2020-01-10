@@ -10,4 +10,8 @@
     <string name="add_grocery">Aggiungi alla lista della spesa</string>
     <string name="add_storage">Aggiungi alla dispensa</string>
     <string name="name">Nome ingrediente *</string>
+    <string name="quant">Quantità</string>
+    <string name="unit">Unità</string>
+    <string name="cat">Categoria</string>
+
 </resources>
