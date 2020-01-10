@@ -1,4 +1,4 @@
-package com.disorganizzazione.spesapp.db
+package com.disorganizzazione.spesapp.db.ingredients
 
 import androidx.room.Entity
 

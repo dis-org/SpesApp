@@ -1,7 +1,8 @@
-package com.disorganizzazione.spesapp
+package com.disorganizzazione.spesapp.add_ingredients
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.disorganizzazione.spesapp.R
 
 class AddIngredientActivity : AppCompatActivity() {
 

@@ -5,7 +5,12 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.disorganizzazione.spesapp.utils.Converters
+import com.disorganizzazione.spesapp.db.ingredients.GroceryListDAO
+import com.disorganizzazione.spesapp.db.ingredients.GroceryListEntity
+import com.disorganizzazione.spesapp.db.ingredients.StorageDAO
+import com.disorganizzazione.spesapp.db.ingredients.StorageEntity
+import com.disorganizzazione.spesapp.db.recipes.RecipesDAO
+import com.disorganizzazione.spesapp.db.recipes.RecipesEntity
 
 /* Classe base per l'intero database. Note: DAO stands for Data Access Object.
 *  Basic class for the entire database. NB: DAO sta per Data Access Object. */

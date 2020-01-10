@@ -1,4 +1,4 @@
-package com.disorganizzazione.spesapp
+package com.disorganizzazione.spesapp.db
 
 typealias IngredientName = String
 

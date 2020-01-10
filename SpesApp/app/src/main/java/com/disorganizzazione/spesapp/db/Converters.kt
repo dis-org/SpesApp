@@ -1,8 +1,6 @@
-package com.disorganizzazione.spesapp.utils
+package com.disorganizzazione.spesapp.db
 
 import androidx.room.TypeConverter
-import com.disorganizzazione.spesapp.IngredientName
-import com.disorganizzazione.spesapp.UnitOfMeasurement
 import java.util.*
 
 /* Convertitori di tipo per il database (non necessario per booleani) */
@@ -30,7 +28,7 @@ class Converters {
     }
 
     @TypeConverter
-    fun stringToQuantityPair(str: String?): Pair<Float,UnitOfMeasurement?>? {
+    fun stringToQuantityPair(str: String?): Pair<Float, UnitOfMeasurement?>? {
         if (str != null) {
             val spl= str.split(' ', limit = 2)
             val num = spl[0].toFloatOrNull()
@@ -41,7 +39,7 @@ class Converters {
     }
 
     @TypeConverter
-    fun quantityPairToString(qnt: Pair<Float,UnitOfMeasurement?>?): String? {
+    fun quantityPairToString(qnt: Pair<Float, UnitOfMeasurement?>?): String? {
         if (qnt != null)
             return "${qnt.first} ${qnt.second ?: ""}"
         return null
