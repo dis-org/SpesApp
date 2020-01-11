@@ -13,5 +13,7 @@
     <string name="quant">Quantità</string>
     <string name="unit">Unità</string>
     <string name="cat">Categoria</string>
+    <string name="use_bf">Data di scadenza</string>
+    <string name="add_btn">AGGIUNGI</string>
 
 </resources>
