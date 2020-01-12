@@ -14,4 +14,9 @@ class StorageEntity : IngredientEntity() {
     // Expiration date: it is a Long because SQLite does not even have dates...
     @ColumnInfo
     var useBefore : Date? = null
+
+    override fun print() {
+        super.print()
+        println("expiration date: ${this.useBefore ?: ""}")
+    }
 }

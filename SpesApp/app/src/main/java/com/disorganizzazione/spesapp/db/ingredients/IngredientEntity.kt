@@ -27,4 +27,10 @@ abstract class IngredientEntity {
     @ColumnInfo
     var category : String? = null
 
+    open fun print() {
+        println("name: ${this.name}")
+        println("quantity: ${this.quantity?.first ?: ""} ${this.quantity?.second ?: ""}")
+        println("category: ${this.category ?: ""}")
+    }
+
 }
