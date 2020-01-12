@@ -11,11 +11,15 @@ import android.widget.DatePicker
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.disorganizzazione.spesapp.R
+import com.disorganizzazione.spesapp.Utils.getValue
+import com.disorganizzazione.spesapp.Utils.nullIfEmpty
 import com.disorganizzazione.spesapp.db.SpesAppDB
 import com.disorganizzazione.spesapp.db.ingredients.GroceryListEntity
 import com.disorganizzazione.spesapp.db.ingredients.IngredientEntity
 import com.disorganizzazione.spesapp.db.ingredients.StorageEntity
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_add_ingredient.*
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.concurrent.thread
 
@@ -24,6 +28,8 @@ import kotlin.concurrent.thread
  * Activity che permette di aggiungere elementi al database degli ingredienti.
  * Activity to add elements to the ingredients database.
  */
+
+val dateFormat = SimpleDateFormat("dd/MM/yyyy")
 
 class AddIngredientActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
@@ -36,19 +42,22 @@ class AddIngredientActivity : AppCompatActivity(), DatePickerDialog.OnDateSetLis
         setContentView(R.layout.activity_add_ingredient)
         var db = SpesAppDB.getInstance(this)
 
-        fun setIngredientFields(ingr: IngredientEntity) {
+        fun setIngredientFields(ingr: IngredientEntity): Boolean {
             /**
              * Prende in input un ingrediente e ne setta i campi a seconda dei dati
              * contenuti nelle varie EditText.
              * Takes in an ingredient and sets its fields according to the data in
              * the various EditTexts.
              */
-            ingr.name = name_et.text.toString()
-            ingr.quantity = Pair(quant_et.text.toString().toFloat(),unit_et.text.toString())
-            ingr.category = cat_et.text.toString()
+            val quant = quant_et.getValue()
+            val useBefore = exp_et.getValue()
+            ingr.name = name_et.getValue() ?: return false
+            ingr.quantity = if (quant != null) Pair(quant.toFloat(),unit_et.getValue()) else null
+            ingr.category = cat_et.getValue()
             if (ingr is StorageEntity) {
-                ingr.useBefore = TODO()
+                ingr.useBefore = if (useBefore != null) dateFormat.parse(useBefore) else null
             }
+            return true
         }
 
         // riceve il numero della tab. Potremmo anche usare un booleano
@@ -59,8 +68,11 @@ class AddIngredientActivity : AppCompatActivity(), DatePickerDialog.OnDateSetLis
                 exp_et.visibility = View.GONE
                 add_btn.setOnClickListener {
                     val item = GroceryListEntity()
-                    setIngredientFields(item)
-                    thread { db?.groceryListDAO()?.insertInGroceryList(item) }
+                    if (setIngredientFields(item)) {
+                        thread { db?.groceryListDAO()?.insertInGroceryList(item) }
+                        item.print()
+                    }
+                    else TODO("show toast")
                 }
             }
             2 -> {
@@ -78,8 +90,11 @@ class AddIngredientActivity : AppCompatActivity(), DatePickerDialog.OnDateSetLis
 
                 add_btn.setOnClickListener {
                     val item = StorageEntity()
-                    setIngredientFields(item)
-                    thread { db?.storageDAO()?.insertInStorage(item) }
+                    if (setIngredientFields(item)) {
+                        thread { db?.storageDAO()?.insertInStorage(item) }
+                        item.print()
+                    }
+                    else TODO("show toast")
                 }
             }
             else -> error(R.string.never_shown)
