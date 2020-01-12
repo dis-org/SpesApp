@@ -67,4 +67,19 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <EditText
+        android:id="@+id/exp_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="date"
+        android:hint="@string/use_bf"
+        android:focusable="false"/>
+
+    <Button
+        android:id="@+id/add_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_btn" />
+
 </LinearLayout>

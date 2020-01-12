@@ -2,8 +2,10 @@ package com.disorganizzazione.spesapp.add_ingredients
 
 import android.R.attr.startYear
 import android.app.DatePickerDialog
+import android.opengl.Visibility
 import android.os.Bundle
 import android.text.InputType
+import android.view.View
 import android.widget.Button
 import android.widget.DatePicker
 import android.widget.EditText
@@ -25,30 +27,14 @@ import kotlin.concurrent.thread
 
 class AddIngredientActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
-    override fun onDateSet(p0: DatePicker?, p1: Int, p2: Int, p3: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onDateSet(p0: DatePicker?, y: Int, m: Int, d: Int) {
+        exp_et.setText("$d/${m + 1}/$y")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_ingredient)
         var db = SpesAppDB.getInstance(this)
-
-
-        fun addButton(): Button {
-            /**
-             * Aggiunge il bottone "ADD" all'interfaccia grafica.
-             * Questo va fatto dinamicamente (credo) perché il suo posizionamento varia a seconda
-             * della tabella su cui si lavora (storage ha un campo in più).
-             * Adds the "ADD" button to the GUI.
-             * This (probably) must be done dynamically because its position varies
-             * according to the table we are working on (storage has one column more).
-             */
-            val addButton = Button(this)
-            addButton.setText(R.string.add_btn)
-            main_layout.addView(addButton)
-            return addButton
-        }
 
         fun setIngredientFields(ingr: IngredientEntity) {
             /**
@@ -60,6 +46,9 @@ class AddIngredientActivity : AppCompatActivity(), DatePickerDialog.OnDateSetLis
             ingr.name = name_et.text.toString()
             ingr.quantity = Pair(quant_et.text.toString().toFloat(),unit_et.text.toString())
             ingr.category = cat_et.text.toString()
+            if (ingr is StorageEntity) {
+                ingr.useBefore = TODO()
+            }
         }
 
         // riceve il numero della tab. Potremmo anche usare un booleano
@@ -67,8 +56,8 @@ class AddIngredientActivity : AppCompatActivity(), DatePickerDialog.OnDateSetLis
         when (intent.getIntExtra("tab",0)) {
             1 -> {
                 setTitle(R.string.add_grocery)
-
-                addButton().setOnClickListener {
+                exp_et.visibility = View.GONE
+                add_btn.setOnClickListener {
                     val item = GroceryListEntity()
                     setIngredientFields(item)
                     thread { db?.groceryListDAO()?.insertInGroceryList(item) }
@@ -77,30 +66,19 @@ class AddIngredientActivity : AppCompatActivity(), DatePickerDialog.OnDateSetLis
             2 -> {
                 setTitle(R.string.add_storage)
 
-                /// TODO: function
-                // aggiunge campo per data di scadenza
-                // adds field for expiry date
-                val dateEditText = EditText(this)
-                dateEditText.setHint(R.string.use_bf)
-                dateEditText.inputType = InputType.TYPE_DATETIME_VARIATION_DATE
-                main_layout.addView(dateEditText)
-
                 val cal = Calendar.getInstance()
-                val y = cal.get(Calendar.YEAR)
-                val m = cal.get(Calendar.MONTH)
-                val d = cal.get(Calendar.DAY_OF_MONTH)
-                val datePickerDialog = DatePickerDialog(this, this@AddIngredientActivity, y, m, d)
-
-                dateEditText.setOnClickListener {
-                    // TODO: prevent keyboard from showing
+                val datePickerDialog = DatePickerDialog(this,
+                    this@AddIngredientActivity,
+                    cal.get(Calendar.YEAR),
+                    cal.get(Calendar.MONTH),
+                    cal.get(Calendar.DAY_OF_MONTH))
+                exp_et.setOnClickListener {
                     datePickerDialog.show()
                 }
 
-                addButton().setOnClickListener {
+                add_btn.setOnClickListener {
                     val item = StorageEntity()
                     setIngredientFields(item)
-                    //TODO once format is decided: item.useBefore = dateEditText.text.toString()
-                    println("DATE: ${dateEditText.text}")
                     thread { db?.storageDAO()?.insertInStorage(item) }
                 }
             }
