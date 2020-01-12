@@ -70,7 +70,6 @@ class AddIngredientActivity : AppCompatActivity(), DatePickerDialog.OnDateSetLis
                     val item = GroceryListEntity()
                     if (setIngredientFields(item)) {
                         thread { db?.groceryListDAO()?.insertInGroceryList(item) }
-                        item.print()
                     }
                     else TODO("show toast")
                 }
@@ -94,7 +93,6 @@ class AddIngredientActivity : AppCompatActivity(), DatePickerDialog.OnDateSetLis
                         thread { db?.storageDAO()?.insertInStorage(item) }
                         item.print()
                     }
-                    else TODO("show toast")
                 }
             }
             else -> error(R.string.never_shown)
