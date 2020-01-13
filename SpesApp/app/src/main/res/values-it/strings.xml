@@ -15,5 +15,8 @@
     <string name="cat">Categoria</string>
     <string name="use_bf">Data di scadenza</string>
     <string name="add_btn">AGGIUNGI</string>
+    <string name="add_success">Ingrediente salvato con successo!</string>
+    <string name="add_failure">Per favore, dai un nome all\'ingrediente!</string>
+
 
 </resources>

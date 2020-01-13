@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.DatePicker
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.disorganizzazione.spesapp.R
 import com.disorganizzazione.spesapp.Utils.getValue
@@ -63,6 +64,7 @@ class AddIngredientActivity : AppCompatActivity(), DatePickerDialog.OnDateSetLis
         // riceve il numero della tab. Potremmo anche usare un booleano
         // gets the tab number. We may just use a boolean instead of an int
         when (intent.getIntExtra("tab",0)) {
+            // TODO: abstract even more
             1 -> {
                 setTitle(R.string.add_grocery)
                 exp_et.visibility = View.GONE
@@ -70,10 +72,10 @@ class AddIngredientActivity : AppCompatActivity(), DatePickerDialog.OnDateSetLis
                     val item = GroceryListEntity()
                     if (setIngredientFields(item)) {
                         thread { db?.groceryListDAO()?.insertInGroceryList(item) }
-                        // TODO("show toast")
+                        Toast.makeText(this, R.string.add_success, Toast.LENGTH_LONG).show()
                         this.finish()
                     }
-                    else TODO("show toast")
+                    else Toast.makeText(this, R.string.add_failure, Toast.LENGTH_LONG).show()
                 }
             }
             2 -> {
@@ -93,10 +95,10 @@ class AddIngredientActivity : AppCompatActivity(), DatePickerDialog.OnDateSetLis
                     val item = StorageEntity()
                     if (setIngredientFields(item)) {
                         thread { db?.storageDAO()?.insertInStorage(item) }
-                        // TODO("show toast")
+                        Toast.makeText(this, R.string.add_success, Toast.LENGTH_LONG).show()
                         this.finish()
                     }
-                    else TODO("show toast")
+                    else Toast.makeText(this, R.string.add_failure, Toast.LENGTH_LONG).show()
                 }
             }
             else -> error(R.string.never_shown)
