@@ -33,22 +33,20 @@ class MainActivityFragment : Fragment() {
          * Performs the "select alls" on the right table, depending on the current fragment, and updates the GUI.
          * The query must be done on a secondary thread cause otherwise Android complains it might take too long.
          */
+        val db = SpesAppDB.getInstance(activity!!.applicationContext)
+        var ingredientList = emptyList<IngredientEntity>()
         thread {
-            var db = SpesAppDB.getInstance(activity!!.applicationContext)
-            val ingredientList = when (pageViewModel.getIndex()) {
-                1 -> db?.groceryListDAO()?.selectAllInGroceryList()
-                2 -> db?.storageDAO()?.selectAllInStorage()
+            ingredientList = when (pageViewModel.getIndex()) {
+                1 -> db?.groceryListDAO()?.selectAllInGroceryList() ?: emptyList()
+                2 -> db?.storageDAO()?.selectAllInStorage() ?: emptyList()
                 else -> emptyList()
             }
             // lo si scrive dentro il thread secondario per mantenere la sequenzialità. Credo.
             // we do this from inside the secondary thread so to preserve sequentiality. I think.
-            if (ingredientList != null) {
-                activity!!.runOnUiThread {
-                    ingr_recycler_view.adapter = IngredientListAdapter(ingredientList!!)
-                }
+            activity!!.runOnUiThread {
+                ingr_recycler_view.adapter = IngredientListAdapter(ingredientList!!)
             }
         }
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
