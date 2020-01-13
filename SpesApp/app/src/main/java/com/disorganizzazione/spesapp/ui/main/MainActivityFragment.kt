@@ -34,7 +34,7 @@ class MainActivityFragment : Fragment() {
          * The query must be done on a secondary thread cause otherwise Android complains it might take too long.
          */
         val db = SpesAppDB.getInstance(activity!!.applicationContext)
-        var ingredientList = emptyList<IngredientEntity>()
+        var ingredientList: List<IngredientEntity>
         thread {
             ingredientList = when (pageViewModel.getIndex()) {
                 1 -> db?.groceryListDAO()?.selectAllInGroceryList() ?: emptyList()
