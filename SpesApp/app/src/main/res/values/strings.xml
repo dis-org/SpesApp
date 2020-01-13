@@ -10,4 +10,13 @@
     <string name="add_grocery">Add to grocery list</string>
     <string name="add_storage">Add to storage</string>
     <string name="name">Ingredient name *</string>
+    <string name="quant">Quantity</string>
+    <string name="unit">Unit</string>
+    <string name="cat">Category</string>
+    <string name="use_bf">Expiry date</string>
+    <string name="add_btn">ADD</string>
+    <string name="add_success">Ingredient saved successfully!</string>
+    <string name="add_failure">Please provide a name for the ingredient!</string>
+
+
 </resources>

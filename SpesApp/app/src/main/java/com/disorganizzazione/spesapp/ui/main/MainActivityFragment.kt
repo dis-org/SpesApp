@@ -26,18 +26,35 @@ class MainActivityFragment : Fragment() {
 
     private lateinit var pageViewModel: PageViewModel
 
+    private fun selectAllAndUpdate() {
+        /**
+         * Esegue le "select all" sulla giusta tabella a seconda del fragment in uso e aggiorna la GUI.
+         * La query deve essere fatta su un thread secondario perché sennò ad Android je pia male.
+         * Performs the "select alls" on the right table, depending on the current fragment, and updates the GUI.
+         * The query must be done on a secondary thread cause otherwise Android complains it might take too long.
+         */
+        val db = SpesAppDB.getInstance(activity!!.applicationContext)
+        var ingredientList: List<IngredientEntity>
+        thread {
+            ingredientList = when (pageViewModel.getIndex()) {
+                1 -> db?.groceryListDAO()?.selectAllInGroceryList() ?: emptyList()
+                2 -> db?.storageDAO()?.selectAllInStorage() ?: emptyList()
+                else -> emptyList()
+            }
+            // lo si scrive dentro il thread secondario per mantenere la sequenzialità. Credo.
+            // we do this from inside the secondary thread so to preserve sequentiality. I think.
+            activity!!.runOnUiThread {
+                ingr_recycler_view.adapter = IngredientListAdapter(ingredientList!!)
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         pageViewModel = ViewModelProviders.of(this).get(PageViewModel::class.java).apply {
             setIndex(arguments?.getInt(ARG_SECTION_NUMBER) ?: 1)
         }
     }
-
-    // definito qui perché sia visibile, anche se il database viene creato nella main activity.
-    // Ci deve essere un modo migliore.
-    // this is defined here so it's visible, even though the database is created in the main activity.
-    // There must be a better way.
-    private var db: SpesAppDB? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,25 +68,7 @@ class MainActivityFragment : Fragment() {
         // sets the layout manager responsible for showing the individual elements of the list
         fragmentLayout.ingr_recycler_view.layoutManager = LinearLayoutManager(activity)
 
-        var db = SpesAppDB.getInstance(activity!!.applicationContext)
-        var ingredientList: List<IngredientEntity>? = emptyList()
-
-        // esegue le "select all" sulla giusta tabella a seconda del fragment in uso.
-        // deve essere su un thread secondario perché sennò Android si preoccupa che la cosa prenda troppo tempo.
-        // performs the "select alls" on the right table depending on the current fragment.
-        // must be done on a secondary thread cause otherwise Android complains it might take too long.
-        thread {
-            when (pageViewModel.getIndex()) {
-                1 -> ingredientList = db?.groceryListDAO()?.selectAllInGroceryList()
-                2 -> ingredientList = db?.storageDAO()?.selectAllInStorage()
-            }
-                // lo si scrive dentro il thread secondario per mantenere la sequenzialità. Credo.
-                // we do this from inside the secondary thread so to preserve sequentiality. I think.
-                activity!!.runOnUiThread {
-                    ingr_recycler_view.adapter = IngredientListAdapter(ingredientList!!)
-                }
-        }
-
+        selectAllAndUpdate()
         // event listener per il bottone +
         // event listener for the + button
         fragmentLayout.fab.setOnClickListener {
@@ -88,6 +87,11 @@ class MainActivityFragment : Fragment() {
         })*/
 
         return fragmentLayout
+    }
+
+    override fun onResume() {
+        super.onResume()
+        selectAllAndUpdate()
     }
 
     companion object {
