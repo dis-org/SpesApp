@@ -1,10 +1,10 @@
-package com.disorganizzazione.spesapp.db
+package com.disorganizzazione.spesapp.db.ingredients
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.disorganizzazione.spesapp.IngredientName
-import com.disorganizzazione.spesapp.UnitOfMeasurement
+import com.disorganizzazione.spesapp.db.IngredientName
+import com.disorganizzazione.spesapp.db.UnitOfMeasurement
 
 /**
  * Tabella astratta di ingredienti,
@@ -20,11 +20,17 @@ abstract class IngredientEntity {
     var name: IngredientName = ""
 
     @ColumnInfo
-    var quantity: Pair<Float,UnitOfMeasurement?>? = null
+    var quantity: Pair<Float, UnitOfMeasurement?>? = null
 
     // le categorie sono scelte dall'utente, per cui sono semplici stringhe
     // categories will be user-defined, so they're just strings
     @ColumnInfo
     var category : String? = null
+
+    open fun print() {
+        println("name: ${this.name}")
+        println("quantity: ${this.quantity?.first ?: ""} ${this.quantity?.second ?: ""}")
+        println("category: ${this.category ?: ""}")
+    }
 
 }

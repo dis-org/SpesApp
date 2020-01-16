@@ -1,4 +1,4 @@
-package com.disorganizzazione.spesapp.db
+package com.disorganizzazione.spesapp.db.ingredients
 
 import androidx.room.*
 
@@ -14,9 +14,7 @@ interface StorageDAO {
     @Query("SELECT * FROM StorageEntity ORDER BY useBefore")
     fun selectAllInStorage(): List<StorageEntity>
 
-    // non sono sicura di quale sia la migliore strategia
-    // not sure what the best strategy is
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.ABORT)
     fun insertInStorage(item: StorageEntity)
 
     @Delete

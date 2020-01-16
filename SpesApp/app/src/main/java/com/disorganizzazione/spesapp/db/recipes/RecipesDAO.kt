@@ -1,4 +1,4 @@
-package com.disorganizzazione.spesapp.db
+package com.disorganizzazione.spesapp.db.recipes
 
 import androidx.room.Dao
 
