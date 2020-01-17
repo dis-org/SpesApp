@@ -6,6 +6,12 @@
     <!-- Error messages -->
     <string name="never_shown">Ahh! L\'app è stregata! Questa stringa non dovrebbe mai essere visualizzata.</string>
 
+    <!-- Ingredient rows -->
+    <string name="ingr_name_def">Gelato</string>
+    <string name="quant_def">1 kg</string>
+    <string name="use_before"> - scade il </string>
+    <string name="use_before_def">20/02/20</string>
+
     <!-- AddIngredientActivity -->
     <string name="add_grocery">Aggiungi alla lista della spesa</string>
     <string name="add_storage">Aggiungi alla dispensa</string>

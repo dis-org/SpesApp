@@ -6,6 +6,12 @@
     <!-- Error messages -->
     <string name="never_shown">Ahh! The app is haunted! This string should never be displayed.</string>
 
+    <!-- Ingredient rows -->
+    <string name="ingr_name_def">Ice cream</string>
+    <string name="quant_def">1 kg</string>
+    <string name="use_before"> - use before </string>
+    <string name="use_before_def">20/02/20</string>
+
     <!-- AddIngredientActivity -->
     <string name="add_grocery">Add to grocery list</string>
     <string name="add_storage">Add to storage</string>

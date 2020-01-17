@@ -26,7 +26,7 @@ class IngredientListAdapter(private val ingredientList: List<IngredientEntity>):
     }
 
     override fun onBindViewHolder(holder: IngredientViewHolder, i: Int) {
-        holder.view.ingredientName.text = ingredientList[i].name
+        holder.view.ingr_name.text = ingredientList[i].name
         // TODO: update as soon as the row layout is more interesting
     }
 }
