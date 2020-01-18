@@ -1,4 +1,4 @@
-package com.disorganizzazione.spesapp.Utils
+package com.disorganizzazione.spesapp.utils
 
 import android.widget.EditText
 
