@@ -9,7 +9,7 @@
     <!-- Ingredient rows -->
     <string name="ingr_name_def">Gelato</string>
     <string name="quant_def">1 kg</string>
-    <string name="use_before">  - scade il </string>
+    <string name="use_before"> - scade il </string>
     <string name="use_before_def">20/02/20</string>
 
     <!-- AddIngredientActivity -->
