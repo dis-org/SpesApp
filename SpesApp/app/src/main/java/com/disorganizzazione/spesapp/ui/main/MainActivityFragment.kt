@@ -34,17 +34,24 @@ class MainActivityFragment : Fragment() {
          * The query must be done on a secondary thread cause otherwise Android complains it might take too long.
          */
         val db = SpesAppDB.getInstance(activity!!.applicationContext)
-        var ingredientList: List<IngredientEntity>
         thread {
-            ingredientList = when (pageViewModel.getIndex()) {
-                1 -> db?.groceryListDAO()?.selectAllInGroceryList() ?: emptyList()
-                2 -> db?.storageDAO()?.selectAllInStorage() ?: emptyList()
-                else -> emptyList()
-            }
-            // lo si scrive dentro il thread secondario per mantenere la sequenzialità. Credo.
-            // we do this from inside the secondary thread so to preserve sequentiality. I think.
-            activity!!.runOnUiThread {
-                ingr_recycler_view.adapter = IngredientListAdapter(ingredientList!!)
+            when (pageViewModel.getIndex()) {
+                1 -> {
+                    val ingredientList = db?.groceryListDAO()?.selectAllInGroceryList() ?: emptyList()
+                    // lo si scrive dentro il thread secondario per mantenere la sequenzialità. Credo.
+                    // we do this from inside the secondary thread so to preserve sequentiality. I think.
+                    activity!!.runOnUiThread {
+                        ingr_recycler_view.adapter = GroceryListAdapter(ingredientList)
+                    }
+                }
+                2 -> {
+                    val ingredientList = db?.storageDAO()?.selectAllInStorage() ?: emptyList()
+                    // lo si scrive dentro il thread secondario per mantenere la sequenzialità. Credo.
+                    // we do this from inside the secondary thread so to preserve sequentiality. I think.
+                    activity!!.runOnUiThread {
+                        ingr_recycler_view.adapter = StorageListAdapter(ingredientList)
+                    }
+                }
             }
         }
     }
