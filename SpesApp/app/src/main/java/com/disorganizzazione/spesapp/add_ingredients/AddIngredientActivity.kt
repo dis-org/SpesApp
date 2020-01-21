@@ -12,6 +12,7 @@ import com.disorganizzazione.spesapp.db.SpesAppDB
 import com.disorganizzazione.spesapp.db.ingredients.GroceryListEntity
 import com.disorganizzazione.spesapp.db.ingredients.IngredientEntity
 import com.disorganizzazione.spesapp.db.ingredients.StorageEntity
+import com.disorganizzazione.spesapp.utils.dateFormat
 import kotlinx.android.synthetic.main.activity_add_ingredient.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -22,8 +23,6 @@ import kotlin.concurrent.thread
  * Activity che permette di aggiungere elementi al database degli ingredienti.
  * Activity to add elements to the ingredients database.
  */
-
-val dateFormat = SimpleDateFormat("dd/MM/yyyy")
 
 class AddIngredientActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
