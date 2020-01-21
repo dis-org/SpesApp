@@ -1,13 +1,11 @@
 package com.disorganizzazione.spesapp.ui.main
 
-import android.provider.Settings.Global.getString
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.disorganizzazione.spesapp.db.ingredients.IngredientEntity
 import com.disorganizzazione.spesapp.R
 import com.disorganizzazione.spesapp.db.ingredients.StorageEntity
-import kotlinx.android.synthetic.main.grocery_list_row.view.*
+import com.disorganizzazione.spesapp.utils.dateFormat
 import kotlinx.android.synthetic.main.grocery_list_row.view.ingr_name
 import kotlinx.android.synthetic.main.grocery_list_row.view.quant
 import kotlinx.android.synthetic.main.storage_list_row.view.*
@@ -36,7 +34,9 @@ class StorageListAdapter(private val ingredientList: List<StorageEntity>): Recyc
         val pair = ingredientList[i].quantity
         holder.view.quant.text = "${pair?.first ?: ""} ${pair?.second ?: ""}"
 
-        // TODO: fix use before and date format
-        holder.view.use_bf.text = "${R.string.use_before} ${ingredientList[i].useBefore}"
+        val date = ingredientList[i].useBefore
+        if (date != null) {
+            holder.view.use_bf.text = "${dateFormat.format(ingredientList[i].useBefore)}"
+        }
     }
 }
