@@ -19,14 +19,13 @@
             android:id="@+id/ingr_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/ingr_name_def"
-            android:textSize="22sp"/>
+            android:paddingTop="3dp"
+            android:textSize="18sp"/>
 
         <TextView
             android:id="@+id/quant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/quant_def"
             android:textSize="12sp"/>
 
     </LinearLayout>
