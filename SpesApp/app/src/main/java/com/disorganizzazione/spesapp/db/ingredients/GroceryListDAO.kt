@@ -1,6 +1,7 @@
 package com.disorganizzazione.spesapp.db.ingredients
 
 import androidx.room.*
+import com.disorganizzazione.spesapp.db.IngredientName
 
 /* Interfaccia per le operazioni sulla tabella "LISTA DELLA SPESA".
 *  Interface for the operations on the "GROCERY LIST" table. */
@@ -20,4 +21,9 @@ interface GroceryListDAO {
     fun deleteFromGroceryList(item: GroceryListEntity)
     // nota: questa funzione non verrà (quasi) mai chiamata se non accompagnata da una chiamata di insertInStorage
     // note: this function will (almost) never be called if not together with a call to insertInStorage()
+
+    // modifica il campo "bought"
+    // updates field "bought"
+    @Query("UPDATE GroceryListEntity set bought = :truth WHERE name = :ingrName")
+    fun tick(ingrName: IngredientName, truth: Boolean)
 }
