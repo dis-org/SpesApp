@@ -36,7 +36,7 @@ class StorageListAdapter(private val ingredientList: List<StorageEntity>): Recyc
 
         val date = ingredientList[i].useBefore
         if (date != null) {
-            holder.view.use_bf.text = "${dateFormat.format(ingredientList[i].useBefore)}"
+            holder.view.use_bf.text = "${dateFormat.format(ingredientList[i].useBefore ?: "")}"
         }
     }
 }
