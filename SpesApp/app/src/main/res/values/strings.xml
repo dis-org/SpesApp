@@ -6,6 +6,10 @@
     <!-- Error messages -->
     <string name="never_shown">Ahh! The app is haunted! This string should never be displayed.</string>
 
+    <!-- Ingredient rows -->
+    <string name="quant_unit"> %1$d %2$s</string>
+    <string name="use_before"> - use before </string>
+
     <!-- AddIngredientActivity -->
     <string name="add_grocery">Add to grocery list</string>
     <string name="add_storage">Add to storage</string>

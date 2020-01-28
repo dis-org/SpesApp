@@ -1,24 +1,18 @@
 package com.disorganizzazione.spesapp.add_ingredients
 
-import android.R.attr.startYear
 import android.app.DatePickerDialog
-import android.opengl.Visibility
 import android.os.Bundle
-import android.text.InputType
 import android.view.View
-import android.widget.Button
 import android.widget.DatePicker
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.disorganizzazione.spesapp.R
-import com.disorganizzazione.spesapp.Utils.getValue
-import com.disorganizzazione.spesapp.Utils.nullIfEmpty
+import com.disorganizzazione.spesapp.utils.getValue
 import com.disorganizzazione.spesapp.db.SpesAppDB
 import com.disorganizzazione.spesapp.db.ingredients.GroceryListEntity
 import com.disorganizzazione.spesapp.db.ingredients.IngredientEntity
 import com.disorganizzazione.spesapp.db.ingredients.StorageEntity
-import com.google.android.material.snackbar.Snackbar
+import com.disorganizzazione.spesapp.utils.dateFormat
 import kotlinx.android.synthetic.main.activity_add_ingredient.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -29,8 +23,6 @@ import kotlin.concurrent.thread
  * Activity che permette di aggiungere elementi al database degli ingredienti.
  * Activity to add elements to the ingredients database.
  */
-
-val dateFormat = SimpleDateFormat("dd/MM/yyyy")
 
 class AddIngredientActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
