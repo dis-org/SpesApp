@@ -13,10 +13,5 @@ class StorageEntity : IngredientEntity() {
     // Data di scadenza: è un Long perché SQLite non ha manco le date...
     // Expiration date: it is a Long because SQLite does not even have dates...
     @ColumnInfo
-    var useBefore : Date? = null
-
-    override fun print() {
-        super.print()
-        println("expiration date: ${this.useBefore ?: ""}")
-    }
+    var useBefore: Date? = null
 }
