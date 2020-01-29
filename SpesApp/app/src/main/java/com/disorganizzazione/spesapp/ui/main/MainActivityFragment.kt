@@ -41,7 +41,7 @@ class MainActivityFragment : Fragment() {
                     // lo si scrive dentro il thread secondario per mantenere la sequenzialità. Credo.
                     // we do this from inside the secondary thread so to preserve sequentiality. I think.
                     activity!!.runOnUiThread {
-                        ingr_recycler_view.adapter = GroceryListAdapter(ingredientList)
+                        ingr_recycler_view.adapter = GroceryListAdapter(ingredientList, context)
                     }
                 }
                 2 -> {
