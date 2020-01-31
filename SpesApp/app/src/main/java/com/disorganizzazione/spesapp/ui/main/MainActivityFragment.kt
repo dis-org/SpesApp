@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.disorganizzazione.spesapp.add_ingredients.AddIngredientActivity
-import com.disorganizzazione.spesapp.db.ingredients.IngredientEntity
 import com.disorganizzazione.spesapp.R
 import com.disorganizzazione.spesapp.db.SpesAppDB
 import kotlinx.android.synthetic.main.fragment_main.*
@@ -35,23 +34,13 @@ class MainActivityFragment : Fragment() {
          */
         val db = SpesAppDB.getInstance(activity!!.applicationContext)
         thread {
-            when (pageViewModel.getIndex()) {
-                1 -> {
-                    val ingredientList = db?.groceryListDAO()?.selectAllInGroceryList() ?: emptyList()
-                    // lo si scrive dentro il thread secondario per mantenere la sequenzialità. Credo.
-                    // we do this from inside the secondary thread so to preserve sequentiality. I think.
-                    activity!!.runOnUiThread {
-                        ingr_recycler_view.adapter = GroceryListAdapter(ingredientList, context)
-                    }
+            val ingredientList = when (pageViewModel.getIndex()) {
+                1 -> db?.groceryListDAO()?.selectAllInGroceryList() ?: emptyList()
+                2 -> db?.storageDAO()?.selectAllInStorage() ?: emptyList()
+                else -> emptyList()
                 }
-                2 -> {
-                    val ingredientList = db?.storageDAO()?.selectAllInStorage() ?: emptyList()
-                    // lo si scrive dentro il thread secondario per mantenere la sequenzialità. Credo.
-                    // we do this from inside the secondary thread so to preserve sequentiality. I think.
-                    activity!!.runOnUiThread {
-                        ingr_recycler_view.adapter = StorageListAdapter(ingredientList)
-                    }
-                }
+            activity!!.runOnUiThread {
+                ingr_recycler_view.adapter = IngredientAdapter(ingredientList, context)
             }
         }
     }
