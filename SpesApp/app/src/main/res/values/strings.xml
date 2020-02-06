@@ -10,6 +10,8 @@
     <string name="quant_unit"> %1$d %2$s</string>
     <string name="use_before"> - use before </string>
 
+    <string name="delete">Delete</string>
+
     <!-- AddIngredientActivity -->
     <string name="add_grocery">Add to grocery list</string>
     <string name="add_storage">Add to storage</string>

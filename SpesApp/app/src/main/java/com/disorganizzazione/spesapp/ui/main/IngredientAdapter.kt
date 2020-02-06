@@ -22,7 +22,7 @@ import kotlin.concurrent.thread
  * It creates ViewHolders (as little as possible) and binds the data.
  */
 
-class IngredientAdapter(private val ingredientList: List<IngredientEntity>, context: Context?): RecyclerView.Adapter<IngredientViewHolder>() {
+class IngredientAdapter(private val ingredientList: MutableList<IngredientEntity>, context: Context?): RecyclerView.Adapter<IngredientViewHolder>() {
 
     private val ctx = context
 
@@ -30,7 +30,8 @@ class IngredientAdapter(private val ingredientList: List<IngredientEntity>, cont
     // it creates a new row (no one knows how) and returns the corresponding ViewHolder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IngredientViewHolder {
         val row = when (ingredientList[0] is GroceryListEntity) { // a bit too hacky. TODO: find a better way
-            true -> LayoutInflater.from(parent.context).inflate(R.layout.grocery_list_row, parent, false)
+            true ->
+                LayoutInflater.from(parent.context).inflate(R.layout.grocery_list_row, parent, false)
             false -> LayoutInflater.from(parent.context).inflate(R.layout.storage_list_row, parent, false)
         }
         return IngredientViewHolder(row)
@@ -73,5 +74,20 @@ class IngredientAdapter(private val ingredientList: List<IngredientEntity>, cont
                 holder.view.use_bf.text = "${dateFormat.format(ingredient.useBefore ?: "")}"
             }
         }
+    }
+
+    fun removeIngredient(i: Int) {
+        val ingredient = ingredientList[i]
+        ingredientList.removeAt(i)
+        notifyDataSetChanged()
+        var db = SpesAppDB.getInstance(ctx!!)
+        if (ingredient is GroceryListEntity)
+            thread {
+                db?.groceryListDAO()?.deleteFromGroceryList(ingredient)
+            }
+        else if (ingredient is StorageEntity)
+            thread {
+                db?.storageDAO()?.deleteFromStorage(ingredient)
+            }
     }
 }

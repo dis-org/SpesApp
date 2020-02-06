@@ -3,8 +3,10 @@ package com.disorganizzazione.spesapp.ui.main
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,6 +27,8 @@ class MainActivityFragment : Fragment() {
 
     private lateinit var pageViewModel: PageViewModel
 
+    private lateinit var adapter: IngredientAdapter
+
     private fun selectAllAndUpdate() {
         /**
          * Esegue le "select all" sulla giusta tabella a seconda del fragment in uso e aggiorna la GUI.
@@ -40,7 +44,9 @@ class MainActivityFragment : Fragment() {
                 else -> emptyList()
                 }
             activity!!.runOnUiThread {
-                ingr_recycler_view.adapter = IngredientAdapter(ingredientList, context)
+                adapter = IngredientAdapter(ingredientList.toMutableList(), context)
+                ingr_recycler_view.adapter = adapter
+
             }
         }
     }
@@ -88,6 +94,14 @@ class MainActivityFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         selectAllAndUpdate()
+    }
+
+    override fun onContextItemSelected(item: MenuItem?): Boolean {
+        super.onContextItemSelected(item)
+        // as for now there is only one case (delete), so no need to use a when with item id cases
+        adapter.removeIngredient(item!!.groupId)
+
+        return true
     }
 
     companion object {
