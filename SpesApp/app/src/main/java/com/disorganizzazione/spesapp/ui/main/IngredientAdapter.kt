@@ -1,10 +1,10 @@
 package com.disorganizzazione.spesapp.ui.main
 
 import android.content.Context
-import com.disorganizzazione.spesapp.R
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.disorganizzazione.spesapp.R
 import com.disorganizzazione.spesapp.db.SpesAppDB
 import com.disorganizzazione.spesapp.db.ingredients.GroceryListEntity
 import com.disorganizzazione.spesapp.db.ingredients.IngredientEntity
@@ -19,7 +19,7 @@ import kotlin.concurrent.thread
 
 /**
  * Crea i ViewHolder (nel numero minimo indispensabile) e gli associa i dati.
- * It creates ViewHolders (as little as possible) and binds the data.
+ * It creates ViewHolders (as few as possible) and binds the data.
  */
 
 class IngredientAdapter(private val ingredientList: MutableList<IngredientEntity>, context: Context?): RecyclerView.Adapter<IngredientViewHolder>() {
@@ -39,6 +39,16 @@ class IngredientAdapter(private val ingredientList: MutableList<IngredientEntity
 
     override fun getItemCount(): Int {
         return ingredientList.size
+    }
+
+    private var position = 0
+
+    fun getPosition(): Int {
+        return position
+    }
+
+    fun setPosition(position: Int) {
+        this.position = position
     }
 
     override fun onBindViewHolder(holder: IngredientViewHolder, i: Int) {
@@ -78,6 +88,7 @@ class IngredientAdapter(private val ingredientList: MutableList<IngredientEntity
 
     fun removeIngredient(i: Int) {
         val ingredient = ingredientList[i]
+        println(ingredient.name)
         ingredientList.removeAt(i)
         notifyDataSetChanged()
         var db = SpesAppDB.getInstance(ctx!!)

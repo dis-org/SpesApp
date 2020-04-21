@@ -6,16 +6,18 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.AdapterView
+import android.widget.AdapterView.AdapterContextMenuInfo
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.disorganizzazione.spesapp.add_ingredients.AddIngredientActivity
 import com.disorganizzazione.spesapp.R
+import com.disorganizzazione.spesapp.add_ingredients.AddIngredientActivity
 import com.disorganizzazione.spesapp.db.SpesAppDB
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_main.view.*
 import kotlin.concurrent.thread
+
 
 /**
  * Un fragment usato in entrambe le schede dell'attività principale, contenente una recycler view in cui è mostrata una
@@ -95,14 +97,21 @@ class MainActivityFragment : Fragment() {
         super.onResume()
         selectAllAndUpdate()
     }
-
-    override fun onContextItemSelected(item: MenuItem?): Boolean {
-        super.onContextItemSelected(item)
-        // as for now there is only one case (delete), so no need to use a when with item id cases
-        adapter.removeIngredient(item!!.groupId)
-
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        val i = adapter.getPosition()
+        adapter.removeIngredient(i)
         return true
     }
+    /*
+    override fun onContextItemSelected(item: MenuItem?): Boolean {
+        super.onContextItemSelected(item)
+        val info = item!!.menuInfo as AdapterView.AdapterContextMenuInfo
+        val i = info.position
+        // as for now there is only one case (delete), so no need to use a when with item id cases
+        adapter.removeIngredient(i)
+
+        return true
+    }*/
 
     companion object {
         /**
