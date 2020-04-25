@@ -2,6 +2,7 @@ package com.disorganizzazione.spesapp.ui.main
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.disorganizzazione.spesapp.R
@@ -88,3 +89,5 @@ class IngredientAdapter(
     }
 
 }
+
+class IngredientViewHolder(val view: View): RecyclerView.ViewHolder(view)
