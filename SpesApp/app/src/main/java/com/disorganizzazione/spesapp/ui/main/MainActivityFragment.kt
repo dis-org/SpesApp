@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.disorganizzazione.spesapp.R
-import com.disorganizzazione.spesapp.add_ingredients.AddIngredientActivity
+import com.disorganizzazione.spesapp.add_ingredients.IngredientActivity
 import com.disorganizzazione.spesapp.db.SpesAppDB
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_main.view.*
@@ -72,7 +72,7 @@ class MainActivityFragment : Fragment() {
         fragmentLayout.fab.setOnClickListener {
             // opens a new activity.
             // TODO: insertion should be quick (name only), pop up a dialog instead
-            val intent = Intent(activity!!.applicationContext, AddIngredientActivity::class.java)
+            val intent = Intent(activity!!.applicationContext, IngredientActivity::class.java)
                 // tells the new activity which fragment if was opened from
                 .putExtra("tab",pageViewModel.getIndex())
             startActivity(intent)
