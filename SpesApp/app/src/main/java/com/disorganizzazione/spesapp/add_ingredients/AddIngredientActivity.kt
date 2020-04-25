@@ -7,14 +7,13 @@ import android.widget.DatePicker
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.disorganizzazione.spesapp.R
-import com.disorganizzazione.spesapp.utils.getValue
+import com.disorganizzazione.spesapp.utils.getContent
 import com.disorganizzazione.spesapp.db.SpesAppDB
 import com.disorganizzazione.spesapp.db.ingredients.GroceryListEntity
 import com.disorganizzazione.spesapp.db.ingredients.IngredientEntity
 import com.disorganizzazione.spesapp.db.ingredients.StorageEntity
 import com.disorganizzazione.spesapp.utils.dateFormat
 import kotlinx.android.synthetic.main.activity_add_ingredient.*
-import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.concurrent.thread
 
@@ -42,11 +41,11 @@ class AddIngredientActivity : AppCompatActivity(), DatePickerDialog.OnDateSetLis
              * Takes in an ingredient and sets its fields according to the data in
              * the various EditTexts.
              */
-            val quant = quant_et.getValue()
-            val useBefore = exp_et.getValue()
-            ingr.name = name_et.getValue() ?: return false
-            ingr.quantity = if (quant != null) Pair(quant.toFloat(),unit_et.getValue()) else null
-            ingr.category = cat_et.getValue()
+            val quant = quant_et.getContent()
+            val useBefore = exp_et.getContent()
+            ingr.name = name_et.getContent() ?: return false
+            ingr.quantity = if (quant != null) Pair(quant.toFloat(),unit_et.getContent()) else null
+            ingr.category = cat_et.getContent()
             if (ingr is StorageEntity) {
                 ingr.useBefore = if (useBefore != null) dateFormat.parse(useBefore) else null
             }

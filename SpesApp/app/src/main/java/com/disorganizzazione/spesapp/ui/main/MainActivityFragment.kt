@@ -3,11 +3,8 @@ package com.disorganizzazione.spesapp.ui.main
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.AdapterView.AdapterContextMenuInfo
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,9 +17,8 @@ import kotlin.concurrent.thread
 
 
 /**
- * Un fragment usato in entrambe le schede dell'attività principale, contenente una recycler view in cui è mostrata una
- * lista di ingredienti.
- * A fragment used in both tabs of the main activity, containing a recycler view showing a list of ingredients.
+ * Fragment used in both tabs of the main activity,
+ * containing a recycler view showing a list of ingredients.
  */
 
 class MainActivityFragment : Fragment() {
@@ -33,22 +29,24 @@ class MainActivityFragment : Fragment() {
 
     private fun selectAllAndUpdate() {
         /**
-         * Esegue le "select all" sulla giusta tabella a seconda del fragment in uso e aggiorna la GUI.
-         * La query deve essere fatta su un thread secondario perché sennò ad Android je pia male.
-         * Performs the "select alls" on the right table, depending on the current fragment, and updates the GUI.
-         * The query must be done on a secondary thread cause otherwise Android complains it might take too long.
+         * Performs SELECT * on the db table corresponding to the current tab/fragment
+         * and updates the GUI.
          */
         val db = SpesAppDB.getInstance(activity!!.applicationContext)
+        // create a list of ingredients by querying the db
+        // this MUST happen on a secondary thread as the main one is to be used for UI updates
         thread {
             val ingredientList = when (pageViewModel.getIndex()) {
+                // in the future, we really should use a boolean instead of ints.
+                // For the moment, I think it's easier to remember that 1 is tab1 and 2 is tab2
                 1 -> db?.groceryListDAO()?.selectAllInGroceryList() ?: emptyList()
                 2 -> db?.storageDAO()?.selectAllInStorage() ?: emptyList()
                 else -> emptyList()
                 }
+            // on the UI thread, but AFTER the list is created, the list is fed to the adapter
             activity!!.runOnUiThread {
                 adapter = IngredientAdapter(ingredientList.toMutableList(), context)
                 ingr_recycler_view.adapter = adapter
-
             }
         }
     }
@@ -64,55 +62,31 @@ class MainActivityFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // associa il layout del fragment al fragment
-        // it associates the fragment layout to the fragment
+        // associate the fragment to its layout, set the layout manager for individual ingredients
         val fragmentLayout = inflater.inflate(R.layout.fragment_main, container, false)
-
-        // setta il layout manager responsabile di mostrare i singoli elementi della lista
-        // sets the layout manager responsible for showing the individual elements of the list
         fragmentLayout.ingr_recycler_view.layoutManager = LinearLayoutManager(activity)
 
         selectAllAndUpdate()
-        // event listener per il bottone +
-        // event listener for the + button
+
+        // set the event listener for the + button (there is one per fragment!)
         fragmentLayout.fab.setOnClickListener {
+            // opens a new activity.
+            // TODO: insertion should be quick (name only), pop up a dialog instead
             val intent = Intent(activity!!.applicationContext, AddIngredientActivity::class.java)
-                // comunica alla nuova activity da quale fragment è stata aperta
                 // tells the new activity which fragment if was opened from
                 .putExtra("tab",pageViewModel.getIndex())
             startActivity(intent)
         }
-
-        // servirà solo come esempio se vorremo permettere rotazioni dello schermo
-        // only useful as an example if we want to allow screen rotations
-        /*val textView: TextView = root.findViewById(R.id.section_label)
-        pageViewModel.text.observe(this, Observer<String> {
-            textView.text = it
-        })*/
-
         return fragmentLayout
     }
 
+    // queries and UI updates need to be performed every time the fragments becomes visible again
     override fun onResume() {
         super.onResume()
         selectAllAndUpdate()
     }
-    override fun onContextItemSelected(item: MenuItem): Boolean {
-        val i = adapter.getPosition()
-        adapter.removeIngredient(i)
-        return true
-    }
-    /*
-    override fun onContextItemSelected(item: MenuItem?): Boolean {
-        super.onContextItemSelected(item)
-        val info = item!!.menuInfo as AdapterView.AdapterContextMenuInfo
-        val i = info.position
-        // as for now there is only one case (delete), so no need to use a when with item id cases
-        adapter.removeIngredient(i)
 
-        return true
-    }*/
-
+    // auto-generated tabs magic
     companion object {
         /**
          * The fragment argument representing the section number for this

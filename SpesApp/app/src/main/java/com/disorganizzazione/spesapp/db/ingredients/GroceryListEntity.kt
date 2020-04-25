@@ -8,7 +8,4 @@ import org.jetbrains.annotations.NotNull
 *  Class representing table "GROCERY LIST" (shown in the main activity alongside "IN STORAGE"). */
 
 @Entity
-class GroceryListEntity : IngredientEntity() {
-    @ColumnInfo @NotNull
-    var bought: Boolean = false
-}
+class GroceryListEntity : IngredientEntity()

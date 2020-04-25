@@ -9,46 +9,38 @@ import com.disorganizzazione.spesapp.db.SpesAppDB
 import com.disorganizzazione.spesapp.db.ingredients.GroceryListEntity
 import com.disorganizzazione.spesapp.db.ingredients.IngredientEntity
 import com.disorganizzazione.spesapp.db.ingredients.StorageEntity
-import com.disorganizzazione.spesapp.utils.dateFormat
-import kotlinx.android.synthetic.main.grocery_list_row.view.*
-import kotlinx.android.synthetic.main.grocery_list_row.view.ingr_name
-import kotlinx.android.synthetic.main.grocery_list_row.view.quant
-import kotlinx.android.synthetic.main.storage_list_row.view.*
+import kotlinx.android.synthetic.main.ingredient.view.*
+import kotlinx.android.synthetic.main.ingredient.view.ingr_name
 import kotlin.concurrent.thread
 
 
 /**
- * Crea i ViewHolder (nel numero minimo indispensabile) e gli associa i dati.
- * It creates ViewHolders (as few as possible) and binds the data.
+ * Creates the IngredientViewHolders and binds the data.
  */
 
-class IngredientAdapter(private val ingredientList: MutableList<IngredientEntity>, context: Context?): RecyclerView.Adapter<IngredientViewHolder>() {
+class IngredientAdapter(
+    private val ingredientList: MutableList<IngredientEntity>,
+    context: Context?) : RecyclerView.Adapter<IngredientViewHolder>() {
 
     private val ctx = context
+    private var position = 0
 
-    // crea una nuova riga (non si sa bene come) e restituisce il corrispondente ViewHolder
-    // it creates a new row (no one knows how) and returns the corresponding ViewHolder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IngredientViewHolder {
-        val row = when (ingredientList[0] is GroceryListEntity) { // a bit too hacky. TODO: find a better way
-            true ->
-                LayoutInflater.from(parent.context).inflate(R.layout.grocery_list_row, parent, false)
-            false -> LayoutInflater.from(parent.context).inflate(R.layout.storage_list_row, parent, false)
-        }
-        return IngredientViewHolder(row)
+        /**
+         * Create a new row (no one knows how) and return the corresponding ViewHolder.
+         */
+        return IngredientViewHolder(
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.ingredient,
+                parent,
+                false))
     }
 
     override fun getItemCount(): Int {
+        /**
+         * Return the number of elements of the list.
+         */
         return ingredientList.size
-    }
-
-    private var position = 0
-
-    fun getPosition(): Int {
-        return position
-    }
-
-    fun setPosition(position: Int) {
-        this.position = position
     }
 
     override fun onBindViewHolder(holder: IngredientViewHolder, i: Int) {
@@ -59,38 +51,31 @@ class IngredientAdapter(private val ingredientList: MutableList<IngredientEntity
         // display name
         holder.view.ingr_name.text = ingredient.name
 
-        // display quantity
-        val pair = ingredient.quantity
-        holder.view.quant.text = "${pair?.first ?: ""} ${pair?.second ?: ""}"
-
-        // manage checkbox (GroceryListEntities only)
-        if (ingredient is GroceryListEntity) {
-            holder.view.check_box.isChecked = ingredient.bought
-
-            holder.view.check_box.setOnClickListener {
-                var db = SpesAppDB.getInstance(ctx!!)
-                val ingrName = holder.view.ingr_name.text.toString()
-                val bought = holder.view.check_box.isChecked
-                thread {
-                    db?.groceryListDAO()?.tick(ingrName, bought)
-                }
-            }
-        }
-
-        // display expiration day (StorageEntities only)
-        if (ingredient is StorageEntity) {
-            val date = ingredient.useBefore
-            if (date != null) {
-                holder.view.use_bf.text = "${dateFormat.format(ingredient.useBefore ?: "")}"
+        // manage checkbox (display and OnClickListener)
+        holder.view.check_box.isChecked = ingredient.done
+        holder.view.check_box.setOnClickListener {
+            var db = SpesAppDB.getInstance(ctx!!)
+            val ingrName = holder.view.ingr_name.text.toString()
+            val done = holder.view.check_box.isChecked
+            thread {
+                db?.groceryListDAO()?.tick(ingrName, done)
             }
         }
     }
 
     fun removeIngredient(i: Int) {
+        /**
+         * Removes an ingredient both from the db and from the visible list.
+         */
         val ingredient = ingredientList[i]
-        println(ingredient.name)
+
+        // remove from list
         ingredientList.removeAt(i)
+
+        // update UI
         notifyDataSetChanged()
+
+        // remove from the right table of the db, according to type
         var db = SpesAppDB.getInstance(ctx!!)
         if (ingredient is GroceryListEntity)
             thread {
@@ -101,4 +86,5 @@ class IngredientAdapter(private val ingredientList: MutableList<IngredientEntity
                 db?.storageDAO()?.deleteFromStorage(ingredient)
             }
     }
+
 }

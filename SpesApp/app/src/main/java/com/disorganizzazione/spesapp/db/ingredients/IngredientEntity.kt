@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.disorganizzazione.spesapp.db.IngredientName
 import com.disorganizzazione.spesapp.db.UnitOfMeasurement
+import org.jetbrains.annotations.NotNull
 
 /**
  * Tabella astratta di ingredienti,
@@ -26,6 +27,9 @@ abstract class IngredientEntity {
     // categories will be user-defined, so they're just strings
     @ColumnInfo
     var category : String? = null
+
+    @ColumnInfo @NotNull
+    var done: Boolean = false
 
     open fun print() {
         println("name: ${this.name}")
