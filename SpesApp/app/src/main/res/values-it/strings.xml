@@ -4,12 +4,13 @@
     <string name="tab_text_2">Dispensa</string>
 
     <!-- Error messages -->
-    <string name="never_shown">Ahh! L\'app è stregata! Questa stringa non dovrebbe mai essere visualizzata.</string>
+    <string name="never_shown">
+        Ahh! L\'app è stregata! Questa stringa non dovrebbe mai apparire.
+    </string>
 
     <!-- Ingredient rows -->
     <string name="quant_unit"> %1$d %2$s</string>
     <string name="use_before"> - scade il </string>
-
     <string name="delete">Delete</string>
 
     <!-- AddIngredientActivity -->
