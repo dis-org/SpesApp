@@ -20,6 +20,7 @@ import kotlin.concurrent.thread
 
 /**
  * Ingredient details activity. It allows the user to view and modify all fields.
+ * TODO: rewrite both the code and the layout according to new prototype
  */
 
 class IngredientActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
@@ -35,9 +36,7 @@ class IngredientActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
 
         fun setIngredientFields(ingr: IngredientEntity): Boolean {
             /**
-             * Prende in input un ingrediente e ne setta i campi a seconda dei dati
-             * contenuti nelle varie EditText.
-             * Takes in an ingredient and sets its fields according to the data in
+             * Take in an ingredient and set its fields (excepts "done") according to the data in
              * the various EditTexts.
              */
             val quant = quant_et.getContent()
@@ -51,10 +50,9 @@ class IngredientActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
             return true
         }
 
-        // riceve il numero della tab. Potremmo anche usare un booleano
-        // gets the tab number. We may just use a boolean instead of an int
+        // gets the tab number. Could just use a boolean, but for the moment it's like this for
+        // clarity
         when (intent.getIntExtra("tab",0)) {
-            // TODO: abstract even more
             1 -> {
                 setTitle(R.string.add_grocery)
                 exp_et.visibility = View.GONE
