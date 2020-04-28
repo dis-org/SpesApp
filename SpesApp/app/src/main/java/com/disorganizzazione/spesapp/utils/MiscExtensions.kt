@@ -3,13 +3,16 @@ package com.disorganizzazione.spesapp.utils
 import android.widget.EditText
 
 /**
- * Rimpiazza le stringhe vuote con null, lascia le stringhe non vuote inalterate.
+ * Miscellaneous extension functions used here and there.
+ */
+
+/**
  * Replaces empty strings with null, leaves nonempty strings unchanged.
+ * Only used in EditText.getValue(), but it was worth it.
  */
 fun String.nullIfEmpty() = if (this == "") null else this
 
 /**
- * Restituisce la String? contenuta in una EditText
- * Gets the String? contained in an EditText
+ * Gets the String? contained in an EditText.
  */
-fun EditText.getValue() = this.text.toString().nullIfEmpty()
+fun EditText.getContent() = this.text.toString().nullIfEmpty()

@@ -1,9 +1,11 @@
 package com.disorganizzazione.spesapp.db.ingredients
 
 import androidx.room.*
+import com.disorganizzazione.spesapp.db.IngredientName
 
-/* Interfaccia per le operazioni sulla tabella "DISPENSA".
-*  Interface for the operations on the "IN STORAGE" table. */
+/**
+ * DAO for the ingredients table.
+ */
 
 @Dao
 interface StorageDAO {
@@ -20,4 +22,7 @@ interface StorageDAO {
     @Delete
     fun deleteFromStorage(item: StorageEntity)
 
+    // updates field "done" of a record
+    @Query("UPDATE StorageEntity set done = :truth WHERE name = :ingrName")
+    fun tick(ingrName: IngredientName, truth: Boolean)
 }

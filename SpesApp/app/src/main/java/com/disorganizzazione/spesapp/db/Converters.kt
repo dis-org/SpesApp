@@ -3,10 +3,13 @@ package com.disorganizzazione.spesapp.db
 import androidx.room.TypeConverter
 import java.util.*
 
-/* Convertitori di tipo per il database (non necessario per booleani) */
-/* Type converters for the database (not necessary for booleans) */
+/**
+ * Type converters for the database (not necessary for booleans)
+ **/
 
 class Converters {
+
+    // timestamp <---> date
     @TypeConverter
     fun timestampToDate(stamp: Long?): Date? {
         return if (stamp == null) null else Date(stamp)
@@ -17,6 +20,8 @@ class Converters {
         return date?.time
     }
 
+
+    // comma-separated string <---> list of ingredient name
     @TypeConverter
     fun stringToIngredients(str: String): List<IngredientName> {
         return str.split(',')
@@ -27,6 +32,8 @@ class Converters {
         return list.joinToString(",")
     }
 
+
+    // string <---> (quantity, unit) pair
     @TypeConverter
     fun stringToQuantityPair(str: String?): Pair<Float, UnitOfMeasurement?>? {
         if (str != null) {
