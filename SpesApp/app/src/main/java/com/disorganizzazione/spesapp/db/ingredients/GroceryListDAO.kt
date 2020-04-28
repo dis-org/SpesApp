@@ -3,15 +3,14 @@ package com.disorganizzazione.spesapp.db.ingredients
 import androidx.room.*
 import com.disorganizzazione.spesapp.db.IngredientName
 
-/* Interfaccia per le operazioni sulla tabella "LISTA DELLA SPESA".
-*  Interface for the operations on the "GROCERY LIST" table. */
+/**
+ * DAO for the grocery list table.
+ */
 
 @Dao
 interface GroceryListDAO {
-    // nota: MySQL non ha i booleani
-    // note: MySQL does not have booleans
 
-    @Query("SELECT * FROM GroceryListEntity")
+    @Query("SELECT * FROM GroceryListEntity ORDER BY category")
     fun selectAllInGroceryList(): List<GroceryListEntity>
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
@@ -19,11 +18,8 @@ interface GroceryListDAO {
 
     @Delete
     fun deleteFromGroceryList(item: GroceryListEntity)
-    // nota: questa funzione non verrà (quasi) mai chiamata se non accompagnata da una chiamata di insertInStorage
-    // note: this function will (almost) never be called if not together with a call to insertInStorage()
 
-    // modifica il campo "bought"
-    // updates field "bought"
-    @Query("UPDATE GroceryListEntity set bought = :truth WHERE name = :ingrName")
+    // updates field "done" of a record
+    @Query("UPDATE GroceryListEntity set done = :truth WHERE name = :ingrName")
     fun tick(ingrName: IngredientName, truth: Boolean)
 }

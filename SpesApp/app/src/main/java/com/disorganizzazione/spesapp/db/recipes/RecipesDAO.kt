@@ -4,4 +4,5 @@ import androidx.room.Dao
 
 @Dao
 interface RecipesDAO {
+    //TODO: define cookbook operations
 }
