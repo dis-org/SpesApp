@@ -8,7 +8,7 @@ import com.disorganizzazione.spesapp.db.UnitOfMeasurement
 import org.jetbrains.annotations.NotNull
 
 /**
- * Abstract class representing ingredients.
+ * Abstract class representing ingredients (to buy and bought, these are the common fields).
  * Because polymorphism is lovely.
  */
 
