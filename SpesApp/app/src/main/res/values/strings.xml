@@ -14,7 +14,7 @@
     <!-- AddIngredientActivity -->
     <string name="add_grocery">Add to grocery list</string>
     <string name="add_storage">Add to storage</string>
-    <string name="name">Ingredient name *</string>
+    <string name="name">Ingredient name</string>
     <string name="quant">Quantity</string>
     <string name="unit">Unit</string>
     <string name="cat">Category</string>
