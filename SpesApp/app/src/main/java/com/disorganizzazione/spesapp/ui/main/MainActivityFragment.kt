@@ -70,12 +70,8 @@ class MainActivityFragment : Fragment() {
 
         // set the event listener for the + button (there is one per fragment!)
         fragmentLayout.fab.setOnClickListener {
-            // opens a new activity.
-            // TODO: insertion should be quick (name only), pop up a dialog instead
-            val intent = Intent(activity!!.applicationContext, IngredientActivity::class.java)
-                // tells the new activity which fragment if was opened from
-                .putExtra("tab",pageViewModel.getIndex())
-            startActivity(intent)
+            // the tag is the tab number, so we know where to add the new ingredient
+            AddIngredientDialogFragment().show(fragmentManager,pageViewModel.getIndex().toString())
         }
         return fragmentLayout
     }
