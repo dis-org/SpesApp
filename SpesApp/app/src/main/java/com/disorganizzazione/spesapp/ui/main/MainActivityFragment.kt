@@ -70,8 +70,11 @@ class MainActivityFragment : Fragment() {
 
         // set the event listener for the + button (there is one per fragment!)
         fragmentLayout.fab.setOnClickListener {
-            // the tag is the tab number, so we know where to add the new ingredient
-            AddIngredientDialogFragment().show(fragmentManager,pageViewModel.getIndex().toString())
+            val dialog = AddIngredientDialogFragment()
+            val dialogArgs = Bundle()
+            dialogArgs.putInt("tab",pageViewModel.getIndex()!!)
+            dialog.arguments = dialogArgs
+            dialog.show(fragmentManager, "add_ingr_dialog")
         }
         return fragmentLayout
     }
