@@ -12,7 +12,6 @@ import com.disorganizzazione.spesapp.db.ingredients.GroceryListEntity
 import com.disorganizzazione.spesapp.db.ingredients.StorageEntity
 import kotlinx.android.synthetic.main.dialog_add_ingredient.*
 import kotlinx.android.synthetic.main.ingredient.*
-import kotlin.concurrent.thread
 
 class AddIngredientDialogFragment : DialogFragment() {
 
@@ -32,19 +31,15 @@ class AddIngredientDialogFragment : DialogFragment() {
                             1 -> {
                                 val ingredient = GroceryListEntity()
                                 ingredient.name = new_ingr_name.getContent() ?: ""
-                            thread {
                                 db?.groceryListDAO()?.insertInGroceryList(ingredient)
                             }
-                        }
                             2 -> {
                                 val ingredient = StorageEntity()
                                 ingredient.name = new_ingr_name.getContent() ?: ""
-                            thread {
                                 db?.storageDAO()?.insertInStorage(ingredient)
                             }
                         }
-                    }
-                }
+                    })
                 // no negative button
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
