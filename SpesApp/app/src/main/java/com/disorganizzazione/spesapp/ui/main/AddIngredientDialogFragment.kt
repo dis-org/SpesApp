@@ -2,7 +2,6 @@ package com.disorganizzazione.spesapp.ui.main
 
 import android.app.AlertDialog
 import android.app.Dialog
-import android.content.DialogInterface
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -13,7 +12,6 @@ import com.disorganizzazione.spesapp.db.SpesAppDB
 import com.disorganizzazione.spesapp.db.ingredients.GroceryListEntity
 import com.disorganizzazione.spesapp.db.ingredients.StorageEntity
 import com.disorganizzazione.spesapp.utils.getContent
-import kotlinx.android.synthetic.main.dialog_add_ingredient.*
 import kotlin.concurrent.thread
 
 /**

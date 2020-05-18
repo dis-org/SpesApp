@@ -1,6 +1,5 @@
 package com.disorganizzazione.spesapp.ui.main
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.disorganizzazione.spesapp.R
-import com.disorganizzazione.spesapp.add_ingredients.IngredientActivity
 import com.disorganizzazione.spesapp.db.SpesAppDB
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_main.view.*
