@@ -1,11 +1,12 @@
 package com.disorganizzazione.spesapp.ui.main
 
 import android.os.Bundle
-import com.google.android.material.tabs.TabLayout
-import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.DialogFragment
+import androidx.viewpager.widget.ViewPager
 import com.disorganizzazione.spesapp.R
 import com.disorganizzazione.spesapp.db.SpesAppDB
+import com.google.android.material.tabs.TabLayout
 
 
 /**
@@ -14,7 +15,7 @@ import com.disorganizzazione.spesapp.db.SpesAppDB
  * (cf. MainActivityFragment).
  */
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), AddIngredientDialogFragment.AddIngredientDialogListener {
 
     var db: SpesAppDB? = null
 
@@ -33,5 +34,10 @@ class MainActivity : AppCompatActivity() {
 
         // get an instance of the SQL database
         db = SpesAppDB.getInstance(this)
+    }
+
+    // implement the interface defined in AddIngredientDialogFragment to update UI after adding
+    override fun onDialogQuickAddClick(dialog: DialogFragment) {
+        TODO("tell fragment to do selectAllAndUpdate()")
     }
 }
