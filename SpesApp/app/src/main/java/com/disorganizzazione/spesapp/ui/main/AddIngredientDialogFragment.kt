@@ -55,10 +55,10 @@ class AddIngredientDialogFragment : DialogFragment() {
                         }
                     }
                     2 -> {
-                        val newIngr = GroceryListEntity()
+                        val newIngr = StorageEntity()
                         newIngr.name = ingrName
                         thread {
-                            db?.groceryListDAO()?.insertInGroceryList(newIngr)
+                            db?.storageDAO()?.insertInStorage(newIngr)
                         }
                     }
                 }
