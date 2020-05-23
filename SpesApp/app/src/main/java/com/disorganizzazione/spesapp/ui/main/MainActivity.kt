@@ -3,6 +3,8 @@ package com.disorganizzazione.spesapp.ui.main
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.viewpager.widget.ViewPager
 import com.disorganizzazione.spesapp.R
 import com.disorganizzazione.spesapp.db.SpesAppDB
@@ -38,6 +40,13 @@ class MainActivity : AppCompatActivity(), AddIngredientDialogFragment.AddIngredi
 
     // implement the interface defined in AddIngredientDialogFragment to update UI after adding
     override fun onDialogQuickAddClick(dialog: DialogFragment) {
-        TODO("tell fragment to do selectAllAndUpdate()")
+        // TODO: only update the fragment that needs to be updated
+        val frags: List<Fragment> = supportFragmentManager.fragments
+        for (frag in frags) {
+            val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
+            ft.detach(frag)
+            ft.attach(frag)
+            ft.commit()
+        }
     }
 }

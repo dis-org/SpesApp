@@ -71,6 +71,7 @@ class AddIngredientDialogFragment : DialogFragment() {
                         }
                     }
                 }
+                listener.onDialogQuickAddClick(this)
                 dialog.dismiss()
                 Toast.makeText(activity, R.string.add_success, Toast.LENGTH_LONG).show()
             }

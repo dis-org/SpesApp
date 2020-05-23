@@ -1,5 +1,6 @@
 package com.disorganizzazione.spesapp.ui.main
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -80,6 +81,12 @@ class MainActivityFragment : Fragment() {
     // queries and UI updates need to be performed every time the fragments becomes visible again
     override fun onResume() {
         super.onResume()
+        selectAllAndUpdate()
+    }
+
+    // a very hacky way to update the UI after quick add
+    override fun onDetach() {
+        super.onDetach()
         selectAllAndUpdate()
     }
 
