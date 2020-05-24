@@ -14,6 +14,7 @@ import com.disorganizzazione.spesapp.db.SpesAppDB
 import com.disorganizzazione.spesapp.db.ingredients.GroceryListEntity
 import com.disorganizzazione.spesapp.db.ingredients.StorageEntity
 import com.disorganizzazione.spesapp.utils.getContent
+import kotlinx.android.synthetic.main.dialog_add_ingredient.*
 import kotlin.concurrent.thread
 
 /**
@@ -50,9 +51,9 @@ class AddIngredientDialogFragment : DialogFragment() {
         // get tab number to know which table to work on
         val tab = arguments?.getInt("tab")
         // find the view corresponding to the text field (no idea why one NEEDS findViewById here)
-        val textField = dialog.findViewById(R.id.new_ingr_name) as EditText?
+        val textField = dialog.new_ingr_name as EditText?
         // find the custom button
-        val quickAddBtn = dialog.findViewById(R.id.quickadd_btn) as Button?
+        val quickAddBtn = dialog.quickadd_btn as Button?
         quickAddBtn?.setOnClickListener {
             // TODO: make it much less copy-pasty (maybe via abstract method for IngredientEntity?)
             val ingrName = textField?.getContent()

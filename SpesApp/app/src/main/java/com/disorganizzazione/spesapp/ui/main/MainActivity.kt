@@ -9,6 +9,7 @@ import androidx.viewpager.widget.ViewPager
 import com.disorganizzazione.spesapp.R
 import com.disorganizzazione.spesapp.db.SpesAppDB
 import com.google.android.material.tabs.TabLayout
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 /**
@@ -29,9 +30,9 @@ class MainActivity : AppCompatActivity(), AddIngredientDialogFragment.AddIngredi
 
         // tabs staff (mostly auto-generated)
         val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
-        val viewPager: ViewPager = findViewById(R.id.view_pager)
+        val viewPager: ViewPager = view_pager
         viewPager.adapter = sectionsPagerAdapter
-        val tabs: TabLayout = findViewById(R.id.tabs)
+        val tabs: TabLayout = tabs
         tabs.setupWithViewPager(viewPager)
 
         // get an instance of the SQL database
