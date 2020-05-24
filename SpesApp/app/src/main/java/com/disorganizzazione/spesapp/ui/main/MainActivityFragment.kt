@@ -1,6 +1,6 @@
 package com.disorganizzazione.spesapp.ui.main
 
-import android.content.Intent
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.disorganizzazione.spesapp.R
-import com.disorganizzazione.spesapp.add_ingredients.IngredientActivity
 import com.disorganizzazione.spesapp.db.SpesAppDB
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_main.view.*
@@ -70,12 +69,11 @@ class MainActivityFragment : Fragment() {
 
         // set the event listener for the + button (there is one per fragment!)
         fragmentLayout.fab.setOnClickListener {
-            // opens a new activity.
-            // TODO: insertion should be quick (name only), pop up a dialog instead
-            val intent = Intent(activity!!.applicationContext, IngredientActivity::class.java)
-                // tells the new activity which fragment if was opened from
-                .putExtra("tab",pageViewModel.getIndex())
-            startActivity(intent)
+            val dialog = AddIngredientDialogFragment()
+            val dialogArgs = Bundle()
+            dialogArgs.putInt("tab",pageViewModel.getIndex()!!)
+            dialog.arguments = dialogArgs
+            dialog.show(fragmentManager, "add_ingr_dialog")
         }
         return fragmentLayout
     }
@@ -83,6 +81,12 @@ class MainActivityFragment : Fragment() {
     // queries and UI updates need to be performed every time the fragments becomes visible again
     override fun onResume() {
         super.onResume()
+        selectAllAndUpdate()
+    }
+
+    // a very hacky way to update the UI after quick add
+    override fun onDetach() {
+        super.onDetach()
         selectAllAndUpdate()
     }
 
