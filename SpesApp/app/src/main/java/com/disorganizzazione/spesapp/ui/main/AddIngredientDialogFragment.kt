@@ -3,6 +3,7 @@ package com.disorganizzazione.spesapp.ui.main
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
+import android.database.sqlite.SQLiteConstraintException
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -53,6 +54,7 @@ class AddIngredientDialogFragment : DialogFragment() {
         // find the custom button
         val quickAddBtn = dialog.findViewById(R.id.quickadd_btn) as Button?
         quickAddBtn?.setOnClickListener {
+            // TODO: make it much less copy-pasty (maybe via abstract method for IngredientEntity?)
             val ingrName = textField?.getContent()
             if (ingrName != null) {
                 when (tab) {
@@ -60,14 +62,34 @@ class AddIngredientDialogFragment : DialogFragment() {
                         val newIngr = GroceryListEntity()
                         newIngr.name = ingrName
                         thread {
-                            db?.groceryListDAO()?.insertInGroceryList(newIngr)
+                            try {
+                                db?.groceryListDAO()?.insertInGroceryList(newIngr)
+                            } catch (e: SQLiteConstraintException) {
+                                activity!!.runOnUiThread {
+                                    Toast.makeText(
+                                        activity,
+                                        R.string.add_failure_duplicate,
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                }
+                            }
                         }
                     }
                     2 -> {
                         val newIngr = StorageEntity()
                         newIngr.name = ingrName
                         thread {
-                            db?.storageDAO()?.insertInStorage(newIngr)
+                            try {
+                                db?.storageDAO()?.insertInStorage(newIngr)
+                            } catch (e: SQLiteConstraintException) {
+                                activity!!.runOnUiThread {
+                                    Toast.makeText(
+                                        activity,
+                                        R.string.add_failure_duplicate,
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                }
+                            }
                         }
                     }
                 }

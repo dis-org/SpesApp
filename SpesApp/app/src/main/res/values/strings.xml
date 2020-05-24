@@ -22,6 +22,5 @@
     <string name="add_btn">ADD</string>
     <string name="add_success">Ingredient saved successfully!</string>
     <string name="add_failure">Please provide a name for the ingredient!</string>
-
-
+    <string name="add_failure_duplicate">Ingredient already listed!</string>
 </resources>
