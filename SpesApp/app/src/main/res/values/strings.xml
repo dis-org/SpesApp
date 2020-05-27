@@ -23,4 +23,6 @@
     <string name="add_success">Ingredient saved successfully!</string>
     <string name="add_failure">Please provide a name for the ingredient!</string>
     <string name="add_failure_duplicate">Ingredient already listed!</string>
+
+    <string name="coming_soon">This feature is coming soon!</string>
 </resources>

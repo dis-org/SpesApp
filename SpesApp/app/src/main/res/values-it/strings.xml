@@ -25,4 +25,6 @@
     <string name="add_success">Ingrediente salvato con successo!</string>
     <string name="add_failure">Per favore, dai un nome all\'ingrediente!</string>
     <string name="add_failure_duplicate">Ingrediente già presente!</string>
+
+    <string name="coming_soon">Questa funzionalità é in arrivo!</string>
 </resources>
