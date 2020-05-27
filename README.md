@@ -1,2 +1,2 @@
 # SpesApp
-L'unico modo sensato di genstire la lista della spesa.
+SpesApp is __a grocery list app designed to help you avoid wasting food (and money!)__.
