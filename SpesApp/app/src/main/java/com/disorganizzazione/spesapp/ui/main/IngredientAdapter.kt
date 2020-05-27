@@ -58,9 +58,10 @@ class IngredientAdapter(
             var db = SpesAppDB.getInstance(ctx!!)
             val ingrName = holder.view.ingr_name.text.toString()
             val done = holder.view.check_box.isChecked
-            thread {
-                db?.groceryListDAO()?.tick(ingrName, done)
-            }
+            if (ingredient is GroceryListEntity)
+                thread { db?.groceryListDAO()?.tick(ingrName, done) }
+            else if (ingredient is StorageEntity)
+                thread { db?.storageDAO()?.tick(ingrName, done) }
         }
     }
 
