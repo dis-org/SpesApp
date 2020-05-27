@@ -7,4 +7,15 @@ import androidx.room.Entity
  */
 
 @Entity
-class GroceryListEntity : IngredientEntity()
+class GroceryListEntity : IngredientEntity() {
+
+    fun toStorageEntity(): StorageEntity {
+        val se = StorageEntity()
+        se.name = this.name
+        se.quantity = this.quantity
+        se.category = this.category
+        se.done = this.done
+        se.useBefore = null
+        return se
+    }
+}
