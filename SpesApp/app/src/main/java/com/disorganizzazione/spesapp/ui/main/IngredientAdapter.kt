@@ -21,10 +21,13 @@ import kotlin.concurrent.thread
 
 class IngredientAdapter(
     private val ingredientList: MutableList<IngredientEntity>,
-    context: Context?) : RecyclerView.Adapter<IngredientViewHolder>() {
+    context: Context?,
+    fragment: MainActivityFragment) : RecyclerView.Adapter<IngredientViewHolder>() {
 
     private val ctx = context
     private var position = 0
+    private val fragment = fragment
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IngredientViewHolder {
         /**
@@ -58,8 +61,10 @@ class IngredientAdapter(
             var db = SpesAppDB.getInstance(ctx!!)
             val ingrName = holder.view.ingr_name.text.toString()
             val done = holder.view.check_box.isChecked
-            if (ingredient is GroceryListEntity)
+            if (ingredient is GroceryListEntity) {
                 thread { db?.groceryListDAO()?.tick(ingrName, done) }
+                fragment.selectAllAndUpdate()
+            }
             else if (ingredient is StorageEntity)
                 thread { db?.storageDAO()?.tick(ingrName, done) }
         }

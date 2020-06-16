@@ -26,7 +26,7 @@ class MainActivityFragment : Fragment() {
 
     private lateinit var adapter: IngredientAdapter
 
-    private fun selectAllAndUpdate() {
+    fun selectAllAndUpdate() {
         /**
          * Performs SELECT * on the db table corresponding to the current tab/fragment
          * and updates the GUI.
@@ -44,7 +44,7 @@ class MainActivityFragment : Fragment() {
                 }
             // on the UI thread, but AFTER the list is created, the list is fed to the adapter
             activity!!.runOnUiThread {
-                adapter = IngredientAdapter(ingredientList.toMutableList(), context)
+                adapter = IngredientAdapter(ingredientList.toMutableList(), context, this)
                 ingr_recycler_view.adapter = adapter
             }
         }
