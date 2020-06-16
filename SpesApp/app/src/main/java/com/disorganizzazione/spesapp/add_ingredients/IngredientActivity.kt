@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.DatePicker
 import android.widget.Toast
+import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import com.disorganizzazione.spesapp.R
 import com.disorganizzazione.spesapp.utils.getContent
@@ -55,6 +56,7 @@ class IngredientActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
         when (intent.getIntExtra("tab",0)) {
             1 -> {
                 setTitle(R.string.add_grocery)
+                // TODO: setActionBar(Toolbar())
                 exp_et.visibility = View.GONE
                 add_btn.setOnClickListener {
                     val item = GroceryListEntity()
