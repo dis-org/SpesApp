@@ -50,11 +50,36 @@ class MainActivityFragment : Fragment() {
         }
     }
 
+    fun selectAllAndUpdate2() {
+        /**
+         * Performs SELECT * on the db table corresponding to the current tab/fragment
+         * and updates the GUI.
+         */
+        val db = SpesAppDB.getInstance(activity!!.applicationContext)
+        // create a list of ingredients by querying the db
+        // this MUST happen on a secondary thread as the main one is to be used for UI updates
+        thread {
+            val ingredientList = when (pageViewModel.getIndex()) {
+                // in the future, we really should use a boolean instead of ints.
+                // For the moment, I think it's easier to remember that 1 is tab1 and 2 is tab2
+                1 -> db?.groceryListDAO()?.selectAllInGroceryList() ?: emptyList()
+                2 -> db?.storageDAO()?.selectAllInStorage() ?: emptyList()
+                else -> emptyList()
+            }
+            // on the UI thread, but AFTER the list is created, the list is fed to the adapter
+            activity!!.runOnUiThread {
+                adapter = IngredientAdapter(ingredientList.toMutableList(), context, this)
+                ingr_recycler_view.adapter = adapter
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         pageViewModel = ViewModelProviders.of(this).get(PageViewModel::class.java).apply {
             setIndex(arguments?.getInt(ARG_SECTION_NUMBER) ?: 1)
         }
+
     }
 
     override fun onCreateView(
