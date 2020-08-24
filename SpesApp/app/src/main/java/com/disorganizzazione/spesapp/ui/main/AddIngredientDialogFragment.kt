@@ -24,16 +24,6 @@ import kotlin.concurrent.thread
 
 class AddIngredientDialogFragment : DialogFragment() {
 
-    /**
-     * Interface used to pass events to the host ACTIVITY (not fragment directly, unfortunately,
-     * so to MainActivity) to update the UI (recycler view) asap
-     */
-    interface AddIngredientDialogListener {
-        fun onDialogQuickAddClick(dialog: DialogFragment)
-    }
-
-    internal lateinit var listener: AddIngredientDialogListener
-
     // this is called onCreateDialog but it actually CREATES the dialog
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(activity)
@@ -94,23 +84,11 @@ class AddIngredientDialogFragment : DialogFragment() {
                         }
                     }
                 }
-                listener.onDialogQuickAddClick(this)
                 dialog.dismiss()
                 Toast.makeText(activity, R.string.add_success, Toast.LENGTH_LONG).show()
             }
             else Toast.makeText(activity, R.string.add_failure, Toast.LENGTH_LONG).show()
 
-        }
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        // check that the host activity implements the interface, complain if not
-        try {
-            // instantiate the listener
-            listener = context as AddIngredientDialogListener
-        } catch (e: ClassCastException) {
-            throw ClassCastException(("$context must implement AddIngredientDialogListener"))
         }
     }
 }

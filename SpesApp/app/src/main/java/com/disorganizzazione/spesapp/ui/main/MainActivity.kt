@@ -21,7 +21,7 @@ import kotlin.concurrent.thread
  * (cf. MainActivityFragment).
  */
 
-class MainActivity : AppCompatActivity(), AddIngredientDialogFragment.AddIngredientDialogListener {
+class MainActivity : AppCompatActivity() {
 
     var db: SpesAppDB? = null
 
@@ -45,7 +45,6 @@ class MainActivity : AppCompatActivity(), AddIngredientDialogFragment.AddIngredi
         commit_btn.setOnClickListener {
             thread {
                 commitTransactions(db)
-                reattach()
             }
         }
 
@@ -59,22 +58,6 @@ class MainActivity : AppCompatActivity(), AddIngredientDialogFragment.AddIngredi
 
         cookbook_btn.setOnClickListener {
             Toast.makeText(this, R.string.coming_soon, Toast.LENGTH_LONG).show()
-        }
-    }
-
-    // implement the interface defined in AddIngredientDialogFragment to update UI after adding
-    override fun onDialogQuickAddClick(dialog: DialogFragment) {
-        reattach()
-    }
-
-    private fun reattach() {
-        // TODO: only update the fragment that needs to be updated
-        val frags: List<Fragment> = supportFragmentManager.fragments
-        for (frag in frags) {
-            val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
-            ft.detach(frag)
-            ft.attach(frag)
-            ft.commit()
         }
     }
 }

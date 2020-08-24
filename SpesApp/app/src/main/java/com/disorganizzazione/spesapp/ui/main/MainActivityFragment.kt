@@ -26,7 +26,7 @@ class MainActivityFragment : Fragment() {
 
     private lateinit var adapter: IngredientAdapter
 
-    fun selectAllAndUpdate() {
+    private fun selectAllAndUpdate() {
         /**
          * Performs SELECT * on the db table corresponding to the current tab/fragment
          * and updates the GUI.
@@ -42,30 +42,6 @@ class MainActivityFragment : Fragment() {
                 2 -> db?.storageDAO()?.selectAllInStorage() ?: emptyList()
                 else -> emptyList()
                 }
-            // on the UI thread, but AFTER the list is created, the list is fed to the adapter
-            activity!!.runOnUiThread {
-                adapter = IngredientAdapter(ingredientList.toMutableList(), context, this)
-                ingr_recycler_view.adapter = adapter
-            }
-        }
-    }
-
-    fun selectAllAndUpdate2() {
-        /**
-         * Performs SELECT * on the db table corresponding to the current tab/fragment
-         * and updates the GUI.
-         */
-        val db = SpesAppDB.getInstance(activity!!.applicationContext)
-        // create a list of ingredients by querying the db
-        // this MUST happen on a secondary thread as the main one is to be used for UI updates
-        thread {
-            val ingredientList = when (pageViewModel.getIndex()) {
-                // in the future, we really should use a boolean instead of ints.
-                // For the moment, I think it's easier to remember that 1 is tab1 and 2 is tab2
-                1 -> db?.groceryListDAO()?.selectAllInGroceryList() ?: emptyList()
-                2 -> db?.storageDAO()?.selectAllInStorage() ?: emptyList()
-                else -> emptyList()
-            }
             // on the UI thread, but AFTER the list is created, the list is fed to the adapter
             activity!!.runOnUiThread {
                 adapter = IngredientAdapter(ingredientList.toMutableList(), context, this)
@@ -104,14 +80,9 @@ class MainActivityFragment : Fragment() {
     }
 
     // queries and UI updates need to be performed every time the fragments becomes visible again
+    // I mean, just to be sure...
     override fun onResume() {
         super.onResume()
-        selectAllAndUpdate()
-    }
-
-    // a very hacky way to update the UI after quick add
-    override fun onDetach() {
-        super.onDetach()
         selectAllAndUpdate()
     }
 

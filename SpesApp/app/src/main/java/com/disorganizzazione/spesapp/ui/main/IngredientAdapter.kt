@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.disorganizzazione.spesapp.R
 import com.disorganizzazione.spesapp.db.SpesAppDB
@@ -49,7 +48,6 @@ class IngredientAdapter(
     }
 
     override fun onBindViewHolder(holder: IngredientViewHolder, i: Int) {
-
         // get current ingredient
         val ingredient =  ingredientList[i]
 
@@ -57,26 +55,23 @@ class IngredientAdapter(
         holder.view.ingr_name.text = ingredient.name
 
         // manage checkbox (display and OnClickListener)
-        holder.view.check_box.isChecked = ingredient.done
-        holder.view.check_box.setOnClickListener {
+        val box = holder.view.check_box
+        box.isChecked = ingredient.done
+        box.setOnClickListener {
             var db = SpesAppDB.getInstance(ctx!!)
             val ingrName = holder.view.ingr_name.text.toString()
-            val done = holder.view.check_box.isChecked
+            val done = box.isChecked
             if (ingredient is GroceryListEntity)
                 thread { db?.groceryListDAO()?.tick(ingrName, done) }
             else if (ingredient is StorageEntity)
                 thread { db?.storageDAO()?.tick(ingrName, done) }
-            val fm = this.fragment.fragmentManager
-            val ft = fm?.beginTransaction()
-            ft?.detach(this.fragment)
-            ft?.attach(this.fragment)
-            ft?.commit()
         }
     }
 
     fun removeIngredient(i: Int) {
         /**
          * Removes an ingredient both from the db and from the visible list.
+         * TODO: remove if not used later
          */
         val ingredient = ingredientList[i]
 

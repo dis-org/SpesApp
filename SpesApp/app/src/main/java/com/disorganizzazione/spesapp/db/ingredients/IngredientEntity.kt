@@ -30,11 +30,6 @@ abstract class IngredientEntity {
     @ColumnInfo @NotNull
     var done: Boolean = false
 
-    // just for debugging, can be overridden if necessary
-    open fun display() {
-        println("name: ${this.name}")
-        println("quantity: ${this.quantity?.first ?: ""} ${this.quantity?.second ?: ""}")
-        println("category: ${this.category ?: ""}")
-    }
+
 
 }
