@@ -88,7 +88,6 @@ class AddIngredientDialogFragment : DialogFragment() {
                 Toast.makeText(activity, R.string.add_success, Toast.LENGTH_LONG).show()
             }
             else Toast.makeText(activity, R.string.add_failure, Toast.LENGTH_LONG).show()
-
         }
     }
 }

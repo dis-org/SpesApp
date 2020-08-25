@@ -26,7 +26,7 @@ class MainActivityFragment : Fragment() {
 
     private lateinit var adapter: IngredientAdapter
 
-    private fun selectAllAndUpdate() {
+    fun selectAllAndUpdate() {
         /**
          * Performs SELECT * on the db table corresponding to the current tab/fragment
          * and updates the GUI.
@@ -83,6 +83,11 @@ class MainActivityFragment : Fragment() {
     // I mean, just to be sure...
     override fun onResume() {
         super.onResume()
+        selectAllAndUpdate()
+    }
+
+    override fun onPause() {
+        super.onPause()
         selectAllAndUpdate()
     }
 

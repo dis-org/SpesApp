@@ -45,6 +45,9 @@ class MainActivity : AppCompatActivity() {
         commit_btn.setOnClickListener {
             thread {
                 commitTransactions(db)
+                for (fragment in supportFragmentManager.fragments)
+                    if (fragment is MainActivityFragment) // what else?
+                        fragment.selectAllAndUpdate()
             }
         }
 
