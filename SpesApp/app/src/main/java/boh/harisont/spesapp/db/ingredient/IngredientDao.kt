@@ -1,5 +1,6 @@
 package boh.harisont.spesapp.db.ingredient
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import boh.harisont.spesapp.db.IngrName
 
@@ -10,12 +11,14 @@ import boh.harisont.spesapp.db.IngrName
 @Dao
 interface IngredientDao {
 
-    // SELECT (there's no booleans in SQLite hence the 0s and 1s)
+    // SELECT
+    //there's no booleans in SQLite hence the 0s and 1s
+    // LiveData makes the tables observable
     @Query("SELECT * FROM IngredientEntity WHERE bought = 0 ORDER BY category")
-    fun selectGroceryList(): MutableList<IngredientEntity>
+    fun selectGroceryList(): LiveData<List<IngredientEntity>>
 
     @Query("SELECT * FROM IngredientEntity WHERE bought = 1 ORDER BY useBefore")
-    fun selectStorageList(): MutableList<IngredientEntity>
+    fun selectStorageList(): LiveData<List<IngredientEntity>>
 
     // INSERT/DELETE
     @Insert(onConflict = OnConflictStrategy.ABORT)
@@ -25,6 +28,7 @@ interface IngredientDao {
     fun delete(ingr: IngredientEntity)
 
     // UPDATE
+    // TODO: see if it's better to pass the ingr itself!
     @Query("UPDATE IngredientEntity set checked = :truth WHERE name = :name")
     fun check(name: IngrName, truth: Boolean)
 
