@@ -23,8 +23,6 @@ import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
 
-    var db: SpesAppDB? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // set layout
@@ -37,12 +35,9 @@ class MainActivity : AppCompatActivity() {
         val tabs: TabLayout = findViewById(R.id.tabs)
         tabs.setupWithViewPager(viewPager)
 
-        // get an instance of the DB
-        db = SpesAppDB.getInstance(this)
-
         // set listeners for navbar
         commit_btn.setOnClickListener {
-            // TODO: commit db transaction and update (mutable?) list, cf. legacy code
+            // TODO: commit db transaction
             Toast.makeText(this, R.string.coming_soon, Toast.LENGTH_LONG).show()
         }
 
@@ -57,7 +52,6 @@ class MainActivity : AppCompatActivity() {
         cookbook_btn.setOnClickListener {
             Toast.makeText(this, R.string.coming_soon, Toast.LENGTH_LONG).show()
         }
-
 
     }
 }
