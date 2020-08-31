@@ -3,6 +3,11 @@ package boh.harisont.spesapp.db
 import androidx.room.TypeConverter
 import java.util.*
 
+/**
+ * DB type converters cause SQLite lacks even dates.
+ * Ans booleans, but for them you can just use ints.
+ */
+
 class Converters {
     // timestamp/date
     @TypeConverter

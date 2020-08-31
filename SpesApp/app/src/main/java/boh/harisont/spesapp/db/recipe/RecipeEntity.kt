@@ -7,6 +7,10 @@ import boh.harisont.spesapp.db.IngrName
 import boh.harisont.spesapp.db.MealName
 import org.jetbrains.annotations.NotNull
 
+/**
+ * Recipe entity
+ */
+
 @Entity
 class RecipeEntity(
     @PrimaryKey var name : MealName = "",
