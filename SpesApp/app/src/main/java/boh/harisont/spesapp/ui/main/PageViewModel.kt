@@ -16,4 +16,9 @@ class PageViewModel : ViewModel() {
     fun setIndex(index: Int) {
         _index.value = index
     }
+
+    // a way to know in which fragment you are
+    fun getIndex(): Int? {
+        return _index.value
+    }
 }
