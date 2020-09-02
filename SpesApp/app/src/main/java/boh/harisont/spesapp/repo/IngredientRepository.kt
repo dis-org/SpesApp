@@ -7,17 +7,16 @@ import boh.harisont.spesapp.db.ingredient.IngredientDao
 import boh.harisont.spesapp.db.ingredient.IngredientEntity
 import kotlin.concurrent.thread
 
-class IngredientRepository(
-    application: Application,
-    private var groceryList: LiveData<List<IngredientEntity>>?,
-    private var storageList: LiveData<List<IngredientEntity>>?,
-    private var ingrDao: IngredientDao?) {
-    init {
+/**
+ * Ingredient repository, yet another layer of abstraction between the DB and the VM.
+ * DB is instantiated here.
+ */
+
+class IngredientRepository(application: Application) {
         val db = SpesAppDB.getInstance(application)
-        ingrDao = db?.ingredientDao()
-        groceryList = ingrDao?.selectGroceryList()
-        storageList = ingrDao?.selectStorageList()
-    }
+        private val ingrDao = db?.ingredientDao()
+        private val groceryList = ingrDao?.selectGroceryList()
+        private val storageList = ingrDao?.selectStorageList()
 
     fun selectGroceryList(): LiveData<List<IngredientEntity>>? {
         return groceryList
