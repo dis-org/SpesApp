@@ -27,17 +27,6 @@ abstract class SpesAppDB: RoomDatabase() {
     companion object {
         private var INSTANCE: SpesAppDB? = null
 
-        // populate the db for testing purposes
-        // TODO: remove if useless
-        private val CALLBACK = object : RoomDatabase.Callback() {
-            override fun onCreate(db: SupportSQLiteDatabase) {
-                super.onCreate(db)
-                thread {
-                    INSTANCE?.ingredientDao()?.insert(IngredientEntity("latte"))
-                }
-            }
-        }
-
         fun getInstance(context: Context): SpesAppDB? {
             if (INSTANCE == null) {
                 synchronized(SpesAppDB::class) {
@@ -46,7 +35,6 @@ abstract class SpesAppDB: RoomDatabase() {
                         SpesAppDB::class.java,
                         // fallbackToDestructiveMigration destroys the db if you make bad changes
                         "SpesAppDB").fallbackToDestructiveMigration()
-                        .addCallback(CALLBACK)
                         .build()
                     println("DATABASE created")
                 }
