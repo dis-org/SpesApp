@@ -3,6 +3,14 @@
     <string name="tab_text_1">Grocery list</string>
     <string name="tab_text_2">Storage</string>
 
+    <string name="name">Ingredient name</string>
+    <string name="add_btn">ADD</string> <!--TODO replace with icon-->
+
+    <string name="add_success">Ingredient saved successfully!</string>
+    <string name="add_failure_no_key">Please provide a name for the ingredient!</string>
+    <string name="add_failure_duplicate">Ingredient already listed!</string>
+
+
     <string name="never_shown">Ahh! The app is haunted! This string should never appear.</string>
     <string name="coming_soon">This feature is coming soon!</string>
 </resources>
