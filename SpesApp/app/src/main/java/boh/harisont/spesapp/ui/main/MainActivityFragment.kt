@@ -1,15 +1,12 @@
 package boh.harisont.spesapp.ui.main
 
 import android.os.Bundle
-import android.provider.ContactsContract.CommonDataKinds.Note
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import boh.harisont.spesapp.R
 import boh.harisont.spesapp.db.ingredient.IngredientEntity
@@ -25,6 +22,8 @@ class MainActivityFragment : Fragment() {
 
     private lateinit var pageViewModel: PageViewModel
     private lateinit var ingrViewModel: IngredientViewModel
+    private lateinit var adapter: IngredientAdapter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,16 +32,20 @@ class MainActivityFragment : Fragment() {
         }
 
         ingrViewModel = ViewModelProvider(this).get(IngredientViewModel::class.java)
+
+        adapter = IngredientAdapter()
         when (pageViewModel.getIndex()) {
             1 -> ingrViewModel.selectGroceryList()?.observe(
                 this,
                 Observer<List<IngredientEntity>> {
-                    // TODO: update RecyclerView
+                    // "it" has the right type but no idea what it is
+                    adapter.setIngredients(it)
                 })
             2 -> ingrViewModel.selectStorageList()?.observe(
                 this,
                 Observer<List<IngredientEntity>> {
-                    // TODO: update RecyclerView
+                    // "it" has the right type but no idea what it is
+                    adapter.setIngredients(it)
                 })
             else -> println(R.string.never_shown)
         }
@@ -55,16 +58,15 @@ class MainActivityFragment : Fragment() {
         // associate the fragment to its layout, set the layout manager for individual ingredients
         val fragmentLayout = inflater.inflate(R.layout.fragment_main, container, false)
         fragmentLayout.ingr_recycler_view.layoutManager = LinearLayoutManager(activity)
-        /* TODO:
+        fragmentLayout.ingr_recycler_view.adapter = adapter
         // set the event listener for the + button (there is one per fragment!)
         fragmentLayout.fab.setOnClickListener {
             val dialog = AddIngredientDialogFragment()
             val dialogArgs = Bundle()
             dialogArgs.putInt("tab",pageViewModel.getIndex()!!)
             dialog.arguments = dialogArgs
-            dialog.show(fragmentManager, "add_ingr_dialog")
+            dialog.show(fragmentManager!!, "add_ingr_dialog")
         }
-        */
         return fragmentLayout
     }
 
