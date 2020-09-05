@@ -17,6 +17,7 @@ import kotlin.concurrent.thread
 
 /**
  * Creates the IngredientViewHolders and binds the data.
+ * Important TODO: call check() on checkbox clicked
  */
 
 class IngredientAdapter: RecyclerView.Adapter<IngredientAdapter.IngredientHolder>() {
