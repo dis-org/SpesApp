@@ -12,7 +12,7 @@ import boh.harisont.spesapp.db.IngrName
 interface IngredientDao {
 
     // SELECT
-    //there's no booleans in SQLite hence the 0s and 1s
+    // there's no booleans in SQLite hence the 0s and 1s
     // LiveData makes the tables observable
     @Query("SELECT * FROM IngredientEntity WHERE bought = 0 ORDER BY category")
     fun selectGroceryList(): LiveData<List<IngredientEntity>>
@@ -31,6 +31,13 @@ interface IngredientDao {
     // TODO: see if it's better to pass the ingr itself!
     @Query("UPDATE IngredientEntity set checked = :truth WHERE name = :name")
     fun check(name: IngrName, truth: Boolean)
+
+    @Query("DELETE FROM IngredientEntity WHERE bought = 1 AND checked = 1")
+    fun deleteAllConsumed()
+
+    // TODO: fix
+    @Query("UPDATE IngredientEntity set bought = 1, checked = 0 WHERE bought = 0 AND checked = 1")
+    fun moveBoughtToStorage()
 
     // TODO: add more update operations
 }

@@ -5,6 +5,8 @@ import com.google.android.material.tabs.TabLayout
 import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
+import boh.harisont.spesapp.ui.main.IngredientViewModel
 import boh.harisont.spesapp.ui.main.SectionsPagerAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -16,6 +18,8 @@ import kotlinx.android.synthetic.main.activity_main.*
  */
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var ingrViewModel: IngredientViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,10 +33,14 @@ class MainActivity : AppCompatActivity() {
         val tabs: TabLayout = findViewById(R.id.tabs)
         tabs.setupWithViewPager(viewPager)
 
+        // get ingredient view model to be able to query ingr db from the bottom navbar buttons
+        ingrViewModel = ViewModelProvider(this).get(IngredientViewModel::class.java)
+
         // set listeners for navbar
         commit_btn.setOnClickListener {
             // TODO: commit db transaction
-            Toast.makeText(this, R.string.coming_soon, Toast.LENGTH_LONG).show()
+            ingrViewModel.moveBoughtToStorage()
+            ingrViewModel.deleteAllConsumed()
         }
 
         share_btn.setOnClickListener {

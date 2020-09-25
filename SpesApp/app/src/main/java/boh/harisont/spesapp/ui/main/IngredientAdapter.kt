@@ -1,5 +1,6 @@
 package boh.harisont.spesapp.ui.main
 
+import android.app.Application
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +18,6 @@ import kotlin.concurrent.thread
 
 /**
  * Creates the IngredientViewHolders and binds the data.
- * Important TODO: call check() on checkbox clicked
  */
 
 class IngredientAdapter: RecyclerView.Adapter<IngredientAdapter.IngredientHolder>() {
@@ -40,6 +40,10 @@ class IngredientAdapter: RecyclerView.Adapter<IngredientAdapter.IngredientHolder
         val ingr = ingrList[i]
         holder.ingrName.text = ingr.name
         holder.checkBox.isChecked = ingr.checked
+        // no idea why my intuition worked but for once it did
+        holder.checkBox.setOnClickListener {
+            IngredientViewModel(application = Application()).check(ingr, !ingr.checked)
+        }
     }
 
     override fun getItemCount(): Int {

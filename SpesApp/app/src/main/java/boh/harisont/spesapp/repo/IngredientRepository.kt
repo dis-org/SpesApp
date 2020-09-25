@@ -26,7 +26,6 @@ class IngredientRepository(application: Application) {
         return storageList
     }
 
-
     fun insert(ingr: IngredientEntity) {
         thread { ingrDao?.insert(ingr) }
     }
@@ -37,6 +36,14 @@ class IngredientRepository(application: Application) {
 
     fun check(ingr: IngredientEntity, truth: Boolean) {
         thread { ingrDao?.check(ingr.name, truth) }
+    }
+
+    fun deleteAllConsumed() {
+        thread { ingrDao?.deleteAllConsumed() }
+    }
+
+    fun moveBoughtToStorage() {
+        thread { ingrDao?.deleteAllConsumed() }
     }
 
 }

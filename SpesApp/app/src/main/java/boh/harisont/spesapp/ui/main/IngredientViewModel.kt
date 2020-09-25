@@ -37,4 +37,11 @@ class IngredientViewModel(application: Application) : AndroidViewModel(applicati
         ingrRepo.check(ingr, truth)
     }
 
+    fun deleteAllConsumed() {
+        ingrRepo.deleteAllConsumed()
+    }
+
+    fun moveBoughtToStorage() {
+        ingrRepo.moveBoughtToStorage()
+    }
 }
