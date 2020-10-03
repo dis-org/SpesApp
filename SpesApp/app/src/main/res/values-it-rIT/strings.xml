@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SpesApp</string>
+    <string name="tab_text_1">Lista della spesa</string>
+    <string name="tab_text_2">Dispensa</string>
+    <string name="name">Nome ingrediente</string>
+    <string name="add_success">Ingrediente salvato correttamente!</string>
+    <string name="add_failure_no_key">Inserire un nome per l\'ingrediente!</string>
+    <string name="add_failure_duplicate">L\'ingrediente é già in lista!</string>
+    <string name="never_shown">Ahh! L\'app é stregata! Questa stringa non dovrebbe mai apparire!</string>
+    <string name="coming_soon">Ci stiamo lavorando!</string>
+</resources>

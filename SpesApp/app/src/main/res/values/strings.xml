@@ -1,10 +1,9 @@
 <resources>
     <string name="app_name">SpesApp</string>
     <string name="tab_text_1">Grocery list</string>
-    <string name="tab_text_2">Storage</string>
+    <string name="tab_text_2">Pantry</string>
 
     <string name="name">Ingredient name</string>
-    <string name="add_btn">ADD</string> <!--TODO replace with icon-->
 
     <string name="add_success">Ingredient saved successfully!</string>
     <string name="add_failure_no_key">Please provide a name for the ingredient!</string>

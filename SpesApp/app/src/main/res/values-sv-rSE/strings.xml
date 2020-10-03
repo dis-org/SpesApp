@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SpesApp</string>
+    <string name="tab_text_1">Inköpslista</string>
+    <string name="tab_text_2">Skafferi</string>
+    <string name="name">Ingrediensnamn</string>
+    <string name="add_success">Ingrediensen har sparats</string>
+    <string name="add_failure_no_key">Ange ett namn för ingrediensen</string>
+    <string name="add_failure_duplicate">Ingrediensen finns redan i en lista!</string>
+    <string name="never_shown">Aaah! Appen är hemsökt! Denna sträng ska aldrig visas.</string>
+    <string name="coming_soon">Denna funktionen kommer snart!</string>
+</resources>
