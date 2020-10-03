@@ -52,7 +52,6 @@ class AddIngredientDialogFragment : DialogFragment() {
                         activity!!.runOnUiThread {
                             Toast.makeText(
                                 activity,
-                                // TODO: debug wrong error message shown
                                 R.string.add_failure_duplicate,
                                 Toast.LENGTH_LONG
                             ).show()
@@ -60,7 +59,6 @@ class AddIngredientDialogFragment : DialogFragment() {
                     }
                 }
                 dialog?.dismiss()
-                Toast.makeText(activity, R.string.add_success, Toast.LENGTH_LONG).show()
             }
             else Toast.makeText(activity, R.string.add_failure_no_key, Toast.LENGTH_LONG).show()
         }

@@ -35,7 +35,6 @@ interface IngredientDao {
     @Query("DELETE FROM IngredientEntity WHERE bought = 1 AND checked = 1")
     fun deleteAllConsumed()
 
-    // TODO: fix
     @Query("UPDATE IngredientEntity set bought = 1, checked = 0 WHERE bought = 0 AND checked = 1")
     fun moveBoughtToStorage()
 
