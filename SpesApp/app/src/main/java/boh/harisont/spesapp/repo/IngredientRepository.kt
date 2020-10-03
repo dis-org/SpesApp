@@ -43,7 +43,7 @@ class IngredientRepository(application: Application) {
     }
 
     fun moveBoughtToStorage() {
-        thread { ingrDao?.deleteAllConsumed() }
+        thread { ingrDao?.moveBoughtToStorage() }
     }
 
 }

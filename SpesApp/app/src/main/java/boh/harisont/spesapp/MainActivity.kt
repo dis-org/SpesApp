@@ -39,8 +39,8 @@ class MainActivity : AppCompatActivity() {
         // set listeners for navbar
         commit_btn.setOnClickListener {
             // TODO: commit db transaction
-            ingrViewModel.moveBoughtToStorage()
             ingrViewModel.deleteAllConsumed()
+            ingrViewModel.moveBoughtToStorage()
         }
 
         share_btn.setOnClickListener {
