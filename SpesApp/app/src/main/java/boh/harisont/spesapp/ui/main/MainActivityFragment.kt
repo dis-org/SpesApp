@@ -1,5 +1,6 @@
 package boh.harisont.spesapp.ui.main
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +24,7 @@ class MainActivityFragment : Fragment() {
     private lateinit var pageViewModel: PageViewModel
     private lateinit var ingrViewModel: IngredientViewModel
     private lateinit var adapter: IngredientAdapter
+    private lateinit var ctx: Context
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +35,8 @@ class MainActivityFragment : Fragment() {
 
         ingrViewModel = ViewModelProvider(this).get(IngredientViewModel::class.java)
 
-        adapter = IngredientAdapter()
+        ctx = this.context!!
+        adapter = IngredientAdapter(ctx)
         when (pageViewModel.getIndex()) {
             1 -> ingrViewModel.selectGroceryList()?.observe(
                 this,

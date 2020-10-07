@@ -2,12 +2,14 @@ package boh.harisont.spesapp.ui.main
 
 import android.app.Application
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
 import androidx.appcompat.view.menu.ActionMenuItemView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import boh.harisont.spesapp.db.SpesAppDB
 import boh.harisont.spesapp.R
@@ -20,8 +22,9 @@ import kotlin.concurrent.thread
  * Creates the IngredientViewHolders and binds the data.
  */
 
-class IngredientAdapter: RecyclerView.Adapter<IngredientAdapter.IngredientHolder>() {
+class IngredientAdapter(ctx: Context): RecyclerView.Adapter<IngredientAdapter.IngredientHolder>() {
     private var ingrList = emptyList<IngredientEntity>()
+    private val ctx = ctx
 
     class IngredientHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val checkBox: CheckBox = itemView.check_box
@@ -43,6 +46,12 @@ class IngredientAdapter: RecyclerView.Adapter<IngredientAdapter.IngredientHolder
         // no idea why my intuition worked but for once it did
         holder.checkBox.setOnClickListener {
             IngredientViewModel(application = Application()).check(ingr, !ingr.checked)
+        }
+        holder.ingrName.setOnClickListener {
+            val intent = Intent(ctx, IngredientDetails::class.java).apply {
+                putExtra("INGR_NAME", ingr.name)
+            }
+            startActivity(ctx,intent,null)
         }
     }
 
