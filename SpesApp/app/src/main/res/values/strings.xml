@@ -3,7 +3,11 @@
     <string name="tab_text_1">Grocery list</string>
     <string name="tab_text_2">Pantry</string>
 
+    <string name="details">Edit details</string>
+
     <string name="name">Ingredient name</string>
+    <string name="use_before">Use before</string>
+    <string name="category">Category</string>
 
     <string name="add_success">Ingredient saved successfully!</string>
     <string name="add_failure_no_key">Please provide a name for the ingredient!</string>
