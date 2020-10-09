@@ -35,8 +35,8 @@
             android:inputType="date" />
 
         <MultiAutoCompleteTextView
+            android:id="@+id/category_d"
             android:hint="@string/category"
-            android:id="@+id/category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

@@ -2,8 +2,8 @@ package boh.harisont.spesapp.repo
 
 import android.app.Application
 import androidx.lifecycle.LiveData
+import boh.harisont.spesapp.db.IngrName
 import boh.harisont.spesapp.db.SpesAppDB
-import boh.harisont.spesapp.db.ingredient.IngredientDao
 import boh.harisont.spesapp.db.ingredient.IngredientEntity
 import kotlin.concurrent.thread
 
@@ -26,6 +26,15 @@ class IngredientRepository(application: Application) {
         return storageList
     }
 
+    // TODO: solve the 10000 problems that will undoubtedly arise
+    fun select(name: IngrName): IngredientEntity {
+        var ingr = IngredientEntity("Ingredient")
+        thread {
+            ingr = ingrDao?.select(name)!!
+        }
+        return ingr
+    }
+
     fun insert(ingr: IngredientEntity) {
         thread { ingrDao?.insert(ingr) }
     }
@@ -45,5 +54,4 @@ class IngredientRepository(application: Application) {
     fun moveBoughtToStorage() {
         thread { ingrDao?.moveBoughtToStorage() }
     }
-
 }
