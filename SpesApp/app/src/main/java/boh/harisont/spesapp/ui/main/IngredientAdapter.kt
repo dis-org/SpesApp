@@ -49,7 +49,7 @@ class IngredientAdapter(ctx: Context): RecyclerView.Adapter<IngredientAdapter.In
         }
         holder.ingrName.setOnClickListener {
             val intent = Intent(ctx, IngredientDetails::class.java).apply {
-                putExtra("INGR_NAME", ingr.name)
+                putExtra("INGR", ingr)
             }
             startActivity(ctx,intent,null)
         }

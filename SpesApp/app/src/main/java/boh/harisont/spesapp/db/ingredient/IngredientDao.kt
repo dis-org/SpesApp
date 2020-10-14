@@ -20,10 +20,6 @@ interface IngredientDao {
     @Query("SELECT * FROM IngredientEntity WHERE bought = 1 ORDER BY useBefore")
     fun selectStorageList(): LiveData<List<IngredientEntity>>
 
-    // select by primary key
-    @Query("SELECT * FROM IngredientEntity WHERE name = :name")
-    fun select(name: IngrName): IngredientEntity
-
     // INSERT/DELETE
     @Insert(onConflict = OnConflictStrategy.ABORT)
     fun insert(ingr: IngredientEntity)

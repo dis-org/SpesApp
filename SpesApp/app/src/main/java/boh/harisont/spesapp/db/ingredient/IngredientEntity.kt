@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import boh.harisont.spesapp.db.IngrName
 import org.jetbrains.annotations.NotNull
+import java.io.Serializable
 import java.util.*
 
 /**
@@ -25,4 +26,4 @@ class IngredientEntity(
 
     // if an item is checked, it means it has been bought (resp. consumed)
     @ColumnInfo @NotNull var checked: Boolean = false
-)
+): Serializable

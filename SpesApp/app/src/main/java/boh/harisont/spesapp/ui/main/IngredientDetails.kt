@@ -8,11 +8,10 @@ import android.view.MenuItem
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import boh.harisont.spesapp.R
+import boh.harisont.spesapp.db.ingredient.IngredientEntity
 import kotlinx.android.synthetic.main.activity_ingredient_details.*
 
 class IngredientDetails : AppCompatActivity() {
-
-    private lateinit var ingrViewModel: IngredientViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,9 +21,7 @@ class IngredientDetails : AppCompatActivity() {
         title = resources.getString(R.string.details)
 
         // get name of ingredient to display, query the db and show it
-        val ingrName = intent.getStringExtra("INGR_NAME")
-        ingrViewModel = ViewModelProvider(this).get(IngredientViewModel::class.java)
-        var ingr = ingrViewModel.select(ingrName!!)
+        val ingr = intent.getSerializableExtra("INGR") as IngredientEntity
         ingr_name_d.setText(ingr.name, TextView.BufferType.EDITABLE)
         use_before_d.setText(ingr.useBefore.toString(), TextView.BufferType.EDITABLE)
         category_d.setText(ingr.category, TextView.BufferType.EDITABLE)

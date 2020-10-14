@@ -26,10 +26,6 @@ class IngredientViewModel(application: Application) : AndroidViewModel(applicati
         return storageList
     }
 
-    fun select(name: IngrName): IngredientEntity {
-        return ingrRepo.select(name)
-    }
-
     fun insert(ingr: IngredientEntity) {
         ingrRepo.insert(ingr)
     }

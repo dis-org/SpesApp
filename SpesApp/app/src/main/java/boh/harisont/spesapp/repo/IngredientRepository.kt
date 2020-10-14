@@ -26,15 +26,6 @@ class IngredientRepository(application: Application) {
         return storageList
     }
 
-    // TODO: solve the 10000 problems that will undoubtedly arise
-    fun select(name: IngrName): IngredientEntity {
-        var ingr = IngredientEntity("Ingredient")
-        thread {
-            ingr = ingrDao?.select(name)!!
-        }
-        return ingr
-    }
-
     fun insert(ingr: IngredientEntity) {
         thread { ingrDao?.insert(ingr) }
     }
