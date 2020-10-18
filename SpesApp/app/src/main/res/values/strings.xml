@@ -13,6 +13,8 @@
     <string name="add_failure_no_key">Please provide a name for the ingredient!</string>
     <string name="add_failure_duplicate">Ingredient already listed!</string>
 
+    <string name="delete_success">Ingredient deleted successfully!</string>
+
 
     <string name="never_shown">Ahh! The app is haunted! This string should never appear.</string>
     <string name="coming_soon">This feature is coming soon!</string>
