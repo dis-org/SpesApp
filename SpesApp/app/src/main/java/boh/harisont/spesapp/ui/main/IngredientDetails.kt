@@ -47,6 +47,11 @@ class IngredientDetails : AppCompatActivity() {
                 Toast.makeText(application, R.string.delete_success,Toast.LENGTH_LONG).show()
                 finish()
             }
+            R.id.save_d -> {
+                //ingrViewModel.delete(ingr)
+                // TODO: in progress
+                //ingrViewModel.insert(IngredientEntity(ingr_name_d.text, use_before_d.text, category_d.text))
+            }
         }
         return super.onOptionsItemSelected(item)
     }

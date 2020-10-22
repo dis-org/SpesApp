@@ -11,7 +11,7 @@
 
     <string name="add_success">Ingredient saved successfully!</string>
     <string name="add_failure_no_key">Please provide a name for the ingredient!</string>
-    <string name="add_failure_duplicate">Ingredient already listed!</string>
+    <string name="add_failure_dupl">Ingredient already listed!</string>
 
     <string name="delete_success">Ingredient deleted successfully!</string>
 

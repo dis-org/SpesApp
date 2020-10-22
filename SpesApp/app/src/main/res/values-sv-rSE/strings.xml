@@ -6,7 +6,7 @@
     <string name="name">Ingrediensnamn</string>
     <string name="add_success">Ingrediensen har sparats</string>
     <string name="add_failure_no_key">Ange ett namn för ingrediensen</string>
-    <string name="add_failure_duplicate">Ingrediensen finns redan i en lista!</string>
+    <string name="add_failure_dupl">Ingrediensen finns redan i en lista!</string>
     <string name="never_shown">Aaah! Appen är hemsökt! Denna sträng ska aldrig visas.</string>
     <string name="coming_soon">Denna funktionen kommer snart!</string>
 </resources>

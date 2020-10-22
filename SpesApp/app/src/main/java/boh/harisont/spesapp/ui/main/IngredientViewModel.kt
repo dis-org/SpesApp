@@ -3,7 +3,6 @@ package boh.harisont.spesapp.ui.main
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import boh.harisont.spesapp.db.IngrName
 import boh.harisont.spesapp.db.ingredient.IngredientEntity
 import boh.harisont.spesapp.repo.IngredientRepository
 

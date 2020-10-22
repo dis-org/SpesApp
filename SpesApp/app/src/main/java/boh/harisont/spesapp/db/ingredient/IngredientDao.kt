@@ -21,7 +21,7 @@ interface IngredientDao {
     fun selectStorageList(): LiveData<List<IngredientEntity>>
 
     // INSERT/DELETE
-    @Insert(onConflict = OnConflictStrategy.ABORT)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(ingr: IngredientEntity)
 
     @Delete
