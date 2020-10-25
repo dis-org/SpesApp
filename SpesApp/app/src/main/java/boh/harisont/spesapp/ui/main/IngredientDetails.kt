@@ -3,7 +3,6 @@ package boh.harisont.spesapp.ui.main
 import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.DatePicker
@@ -14,8 +13,6 @@ import boh.harisont.spesapp.R
 import boh.harisont.spesapp.db.ingredient.IngredientEntity
 import boh.harisont.spesapp.utils.dateFormat
 import kotlinx.android.synthetic.main.activity_ingredient_details.*
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 class IngredientDetails : AppCompatActivity(), DatePickerDialog.OnDateSetListener {

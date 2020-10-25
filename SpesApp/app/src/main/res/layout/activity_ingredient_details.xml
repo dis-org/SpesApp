@@ -44,7 +44,7 @@
             android:textSize="18sp"
             android:paddingTop="@dimen/text_padding_vert"
             android:paddingBottom="@dimen/text_padding_vert"
-            android:paddingLeft="@dimen/text_padding_left"/>
+            android:paddingLeft="@dimen/text_padding_left" />
 
 
     </LinearLayout>
