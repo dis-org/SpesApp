@@ -3,8 +3,10 @@ package boh.harisont.spesapp.ui.main
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import boh.harisont.spesapp.db.IngrName
 import boh.harisont.spesapp.db.ingredient.IngredientEntity
 import boh.harisont.spesapp.repo.IngredientRepository
+import java.util.*
 
 /**
  * View model for the ingredient list(s).
@@ -43,6 +45,10 @@ class IngredientViewModel(application: Application) : AndroidViewModel(applicati
 
     fun moveBoughtToStorage() {
         ingrRepo.moveBoughtToStorage()
+    }
+
+    fun update(oldName: IngrName, newName: IngrName, category: String?, useBefore: Date?) {
+        ingrRepo.update(oldName, newName, category, useBefore)
     }
 
 }

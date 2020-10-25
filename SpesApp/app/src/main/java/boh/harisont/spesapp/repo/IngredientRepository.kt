@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import boh.harisont.spesapp.db.IngrName
 import boh.harisont.spesapp.db.SpesAppDB
 import boh.harisont.spesapp.db.ingredient.IngredientEntity
+import java.util.*
 import kotlin.concurrent.thread
 
 /**
@@ -44,5 +45,9 @@ class IngredientRepository(application: Application) {
 
     fun moveBoughtToStorage() {
         thread { ingrDao?.moveBoughtToStorage() }
+    }
+
+    fun update (oldName: IngrName, newName: IngrName, category: String?, useBefore: Date?) {
+        thread { ingrDao?.update(oldName, newName, category, useBefore) }
     }
 }

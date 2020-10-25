@@ -24,21 +24,27 @@
             android:hint="@string/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10" />
+            android:ems="10"
+            android:paddingLeft="@dimen/text_padding_left" />
 
         <EditText
+            android:id="@+id/category_d"
+            android:hint="@string/category"
+            android:ems="10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/text_padding_left"/>
+
+        <TextView
             android:id="@+id/use_before_d"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/use_before"
+            android:text="@string/use_before"
             android:ems="10"
-            android:inputType="date" />
-
-        <MultiAutoCompleteTextView
-            android:id="@+id/category_d"
-            android:hint="@string/category"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:textSize="18sp"
+            android:paddingTop="@dimen/text_padding_vert"
+            android:paddingBottom="@dimen/text_padding_vert"
+            android:paddingLeft="@dimen/text_padding_left"/>
 
 
     </LinearLayout>

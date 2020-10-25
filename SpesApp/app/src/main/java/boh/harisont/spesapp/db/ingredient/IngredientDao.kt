@@ -3,6 +3,7 @@ package boh.harisont.spesapp.db.ingredient
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import boh.harisont.spesapp.db.IngrName
+import java.util.*
 
 /**
  * DAO for the ingredient table (grocery list + in storage list)
@@ -37,4 +38,7 @@ interface IngredientDao {
 
     @Query("UPDATE IngredientEntity set bought = 1, checked = 0 WHERE bought = 0 AND checked = 1")
     fun moveBoughtToStorage()
+
+    @Query("UPDATE IngredientEntity set name = :newName, category = :category, useBefore = :useBefore WHERE name = :oldName")
+    fun update(oldName: IngrName, newName: IngrName, category: String?, useBefore: Date?)
 }
