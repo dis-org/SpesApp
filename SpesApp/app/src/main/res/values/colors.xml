@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#81C784</color>
-    <color name="colorPrimaryDark">#00B65E</color>
+    <color name="colorPrimaryDark">#73AF75</color>
     <color name="colorAccent">#7986CB</color>
     <color name="expired">#E57373</color>
     <color name="expiring">#FFB74D</color>
-    <color name="notExpiring">#000000</color>
+    <color name="notExpiring">#808080</color>
 </resources>

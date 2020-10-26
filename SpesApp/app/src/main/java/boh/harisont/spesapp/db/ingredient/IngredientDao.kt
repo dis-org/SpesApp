@@ -18,7 +18,7 @@ interface IngredientDao {
     @Query("SELECT * FROM IngredientEntity WHERE bought = 0 ORDER BY category")
     fun selectGroceryList(): LiveData<List<IngredientEntity>>
 
-    @Query("SELECT * FROM IngredientEntity WHERE bought = 1 ORDER BY useBefore")
+    @Query("SELECT * FROM IngredientEntity WHERE bought = 1 ORDER BY CASE WHEN useBefore IS NULL THEN 1 ELSE 0 END, useBefore ASC")
     fun selectStorageList(): LiveData<List<IngredientEntity>>
 
     // INSERT/DELETE

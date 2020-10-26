@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import boh.harisont.spesapp.db.SpesAppDB
 import boh.harisont.spesapp.R
 import boh.harisont.spesapp.db.ingredient.IngredientEntity
+import boh.harisont.spesapp.utils.dateFormat
 import kotlinx.android.synthetic.main.ingredient_item.view.*
 import java.util.*
 import kotlin.concurrent.thread
@@ -45,16 +46,16 @@ class IngredientAdapter(ctx: Context): RecyclerView.Adapter<IngredientAdapter.In
         val ingr = ingrList[i]
         holder.ingrName.text = ingr.name
         val useBefore = ingr.useBefore
-        if (useBefore != null) {
-            when {
-                useBefore < Date() ->
-                    holder.ingrName.setTextColor(ContextCompat.getColor(this.ctx, R.color.expired))
-                useBefore == Date() ->
-                    holder.ingrName.setTextColor(ContextCompat.getColor(this.ctx, R.color.expiring))
-                else ->
-                    holder.ingrName.setTextColor(ContextCompat.getColor(this.ctx, R.color.notExpiring))
-            }
+        var today = dateFormat.parse(dateFormat.format(Date())) // current date with time = 00:00
+        val color = when {
+            !ingr.bought || useBefore == null || useBefore > today ->
+                ContextCompat.getColor(this.ctx, R.color.notExpiring)
+            useBefore == today ->
+                ContextCompat.getColor(this.ctx, R.color.expiring)
+            else ->
+                ContextCompat.getColor(this.ctx, R.color.expired)
         }
+        holder.ingrName.setTextColor(color)
         holder.checkBox.isChecked = ingr.checked
         // no idea why my intuition worked but for once it did
         holder.checkBox.setOnClickListener {
