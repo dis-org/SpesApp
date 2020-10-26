@@ -29,7 +29,6 @@ interface IngredientDao {
     fun delete(ingr: IngredientEntity)
 
     // UPDATE
-    // TODO: see if it's better to pass the ingr itself!
     @Query("UPDATE IngredientEntity set checked = :truth WHERE name = :name")
     fun check(name: IngrName, truth: Boolean)
 
