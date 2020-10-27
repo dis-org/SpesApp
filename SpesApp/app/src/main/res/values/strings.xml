@@ -18,4 +18,6 @@
 
     <string name="never_shown">Ahh! The app is haunted! This string should never appear.</string>
     <string name="coming_soon">This feature is coming soon!</string>
+    
+    <string name="share_message">Could you please buy:</string>
 </resources>

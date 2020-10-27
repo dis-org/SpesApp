@@ -1,11 +1,17 @@
 package boh.harisont.spesapp
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.tabs.TabLayout
 import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
+import androidx.core.view.get
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import boh.harisont.spesapp.db.ingredient.IngredientEntity
+import boh.harisont.spesapp.ui.main.IngredientAdapter
 import boh.harisont.spesapp.ui.main.IngredientViewModel
 import boh.harisont.spesapp.ui.main.SectionsPagerAdapter
 import kotlinx.android.synthetic.main.activity_main.*
@@ -43,7 +49,22 @@ class MainActivity : AppCompatActivity() {
         }
 
         share_btn.setOnClickListener {
-            Toast.makeText(this, R.string.coming_soon, Toast.LENGTH_LONG).show()
+            ingrViewModel.selectGroceryList()?.observe(
+                this,
+                Observer<List<IngredientEntity>> {
+                    // I'm a functional programmer, am I not?
+                    val msg = it
+                        .map { ingr -> "-" + ingr.name } // transform into list item
+                        .fold(
+                            resources.getString(R.string.share_message),
+                            {ingr1,ingr2 -> ingr1 + "\n" + ingr2}) // separate items
+                    val sendIntent: Intent = Intent().apply {
+                        action = Intent.ACTION_SEND
+                        putExtra(Intent.EXTRA_TEXT, msg)
+                        type = "text/plain"
+                    }
+                    startActivity(sendIntent)
+                })
         }
 
         query_btn.setOnClickListener {

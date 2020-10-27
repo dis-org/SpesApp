@@ -26,7 +26,7 @@ import kotlin.concurrent.thread
  */
 
 class IngredientAdapter(ctx: Context): RecyclerView.Adapter<IngredientAdapter.IngredientHolder>() {
-    private var ingrList = emptyList<IngredientEntity>()
+    public var ingrList = emptyList<IngredientEntity>()
     private val ctx = ctx
 
     class IngredientHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
