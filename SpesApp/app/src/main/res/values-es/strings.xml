@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SpesApp</string>
+    <string name="tab_text_1">Lista de compras</string>
+    <string name="tab_text_2">Despensa</string>
+    <string name="details">Editar detalles</string>
+    <string name="name">Nombre del ingrediente</string>
+    <string name="use_before">Consúmase antes de</string>
+    <string name="category">Categoría</string>
+    <string name="no_use_before">Sin fecha de caducidad</string>
+    <string name="add_success">¡Ingrediente guardado correctamente!!</string>
+    <string name="add_failure_no_key">¡Proporcione un nombre para el ingrediente!</string>
+    <string name="add_failure_dupl">¡Ingrediente ya listado!</string>
+    <string name="delete_success">¡Ingrediente eliminado correctamente!</string>
+    <string name="never_shown">"¡Ahh! ¡La aplicación está hecizada! Esta cadena nunca debería aparecer. "</string>
+    <string name="coming_soon">Esta función estará disponible pronto</string>
+    <string name="share_message">Aquí está la lista:</string>
+</resources>

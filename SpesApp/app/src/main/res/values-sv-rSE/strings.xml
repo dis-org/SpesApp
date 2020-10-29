@@ -9,4 +9,10 @@
     <string name="add_failure_dupl">Ingrediensen finns redan i en lista!</string>
     <string name="never_shown">Aaah! Appen är hemsökt! Denna sträng ska aldrig visas.</string>
     <string name="coming_soon">Denna funktionen kommer snart!</string>
+    <string name="details">Redigera detaljer</string>
+    <string name="use_before">Bäst före</string>
+    <string name="category">Kategori</string>
+    <string name="no_use_before">Inget utgångsdatum</string>
+    <string name="delete_success">Ingrediensen har tagits bort!</string>
+    <string name="share_message">Här är listan:</string>
 </resources>

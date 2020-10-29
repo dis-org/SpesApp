@@ -6,7 +6,13 @@
     <string name="name">Nome ingrediente</string>
     <string name="add_success">Ingrediente salvato correttamente!</string>
     <string name="add_failure_no_key">Inserire un nome per l\'ingrediente!</string>
-    <string name="add_failure_dupl">L\'ingrediente é già in lista!</string>
+    <string name="add_failure_dupl">Ingrediente é già in lista!</string>
     <string name="never_shown">Ahh! L\'app é stregata! Questa stringa non dovrebbe mai apparire!</string>
     <string name="coming_soon">Ci stiamo lavorando!</string>
+    <string name="details">Modifca dettagli</string>
+    <string name="use_before">Consumarsi preferibilmente entro</string>
+    <string name="category">Categoria</string>
+    <string name="no_use_before">Nessuna data di scadenza</string>
+    <string name="delete_success">Ingrediente rimosso con successo!</string>
+    <string name="share_message">Ecco la lista:</string>
 </resources>
