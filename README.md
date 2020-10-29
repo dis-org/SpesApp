@@ -10,7 +10,7 @@ Features:
 - __share__ your grocery list with whoever is going to the store with your favorite messaging app
 - available in __English, Italian, bad Swedish and worse Spanish__
 
-![screenshot](screen.jpg)
+![screenshot](screenshot.jpg)
 
 ## Coming (relatively) soon: the cookbook
 - collect your recipes in a simple cookbook
